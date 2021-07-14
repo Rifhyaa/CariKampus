@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">CariKampus</string>
+
+    // Headings
+    <string name="onboarding_heading_one">Cari Informasi Kampus Dengan Mudah</string>
+    <string name="onboarding_heading_two">Kenali Program Studi Kampus</string>
+    <string name="onboarding_heading_three">Tentukan Kampus Impianmu</string>
+
+    // Description
+    <string name="onboaring_desc_one">Eksplorasi kampus terbaik di Indonesia.</string>
+    <string name="onboaring_desc_two">Temukan jurusan kuliah yang tepat sesuai minat dan bakatmu.</string>
+    <string name="onboaring_desc_three">Mantapkan keyakinan pilihan kampus impian kamu.</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
+</resources>

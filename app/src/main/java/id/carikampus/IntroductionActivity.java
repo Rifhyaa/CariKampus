@@ -57,7 +57,7 @@ public class IntroductionActivity extends AppCompatActivity {
                 if (mOnBoardingViewPager.getCurrentItem() + 1 < mOnBoardingAdapter.getItemCount()) {
                     mOnBoardingViewPager.setCurrentItem(mOnBoardingViewPager.getCurrentItem() + 1);
                 } else {
-                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finish();
                 }
             }

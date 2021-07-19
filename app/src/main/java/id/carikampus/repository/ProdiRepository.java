@@ -36,28 +36,6 @@ public class ProdiRepository {
         return INSTANCE;
     }
 
-    public MutableLiveData<List<Prodi>> getProdiByIdKampus(int id) {
-        MutableLiveData<List<Prodi>> prodis = new MutableLiveData<>();
-
-        Call<List<Prodi>> call = mProdiService.getProdiByIdKampus(id);
-        call.enqueue(new Callback<List<Prodi>>() {
-            @Override
-            public void onResponse(Call<List<Prodi>> call, Response<List<Prodi>> response) {
-                if (response.isSuccessful()) {
-                    prodis.setValue(response.body());
-                    CariKampusMethods.printLog(TAG, "getProdiByIdKampus.onResponse() Called!");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Prodi>> call, Throwable t) {
-                Log.e("Error API Call : ",  t.getMessage());
-            }
-        });
-
-        return prodis;
-    }
-
     public MutableLiveData<Prodi> getProdiById(int id) {
         MutableLiveData<Prodi> prodi = new MutableLiveData<>();
 
@@ -78,6 +56,28 @@ public class ProdiRepository {
         });
 
         return prodi;
+    }
+
+    public MutableLiveData<List<Prodi>> getProdiByIdKampus(int id) {
+        MutableLiveData<List<Prodi>> prodis = new MutableLiveData<>();
+
+        Call<List<Prodi>> call = mProdiService.getProdiByIdKampus(id);
+        call.enqueue(new Callback<List<Prodi>>() {
+            @Override
+            public void onResponse(Call<List<Prodi>> call, Response<List<Prodi>> response) {
+                if (response.isSuccessful()) {
+                    prodis.setValue(response.body());
+                    CariKampusMethods.printLog(TAG, "getProdiByIdKampus.onResponse() Called!");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Prodi>> call, Throwable t) {
+                Log.e("Error API Call : ",  t.getMessage());
+            }
+        });
+
+        return prodis;
     }
 }
 

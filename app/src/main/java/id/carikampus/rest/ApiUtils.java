@@ -1,5 +1,6 @@
 package id.carikampus.rest;
 
+import id.carikampus.service.KampusService;
 import id.carikampus.service.ProdiService;
 
 public class ApiUtils {
@@ -17,5 +18,9 @@ public class ApiUtils {
 
     public static ProdiService getProdiService() {
         return RetrofitClient.getClient(API_URL).create(ProdiService.class);
+    }
+
+    public static KampusService getKampusService() {
+        return RetrofitClient.getClient(API_URL).create(KampusService.class);
     }
 }

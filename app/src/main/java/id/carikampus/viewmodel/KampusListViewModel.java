@@ -10,6 +10,8 @@ import id.carikampus.repository.KampusRepository;
 
 public class KampusListViewModel extends ViewModel {
 
+    private static final String TAG = "KampusDetailViewModel";
+
     private MutableLiveData<List<Kampus>> mKampusListMutableLiveData;
     private KampusRepository mKampusRepository;
 

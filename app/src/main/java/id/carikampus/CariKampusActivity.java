@@ -1,25 +1,22 @@
 package id.carikampus;
 
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.ArrayList;
 
-import id.carikampus.data.model.Kampus;
+import id.carikampus.fragment.KampusFragment;
 import id.carikampus.fragment.KampusListFragment;
 import id.carikampus.fragment.ProdiFragment;
 
-public class CariKampusActivity extends AppCompatActivity { // implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class CariKampusActivity extends AppCompatActivity implements KampusListFragment.Callbacks { // implements BottomNavigationView.OnNavigationItemSelectedListener {
+
+    private static final String TAG = "CariKampusActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,23 +30,10 @@ public class CariKampusActivity extends AppCompatActivity { // implements Bottom
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragment_container);
         if (fragment == null) {
-            //fragment = new UserFragment();
             fragment = KampusListFragment.newInstance();
             fm.beginTransaction().add(R.id.fragment_container, fragment)
                     .commit();
         }
-
-//        addData();
-
-//        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-//
-////        adapter = new KampusListFragment.KampusAdapter(mahasiswaArrayList);
-//
-//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(CariKampusActivity.this);
-//
-//        recyclerView.setLayoutManager(layoutManager);
-//
-//        recyclerView.setAdapter(adapter);
     }
 
 //    @Override
@@ -87,4 +71,17 @@ public class CariKampusActivity extends AppCompatActivity { // implements Bottom
             }
             return false;
         }
+
+    @Override
+    public void onKampusSelected(int idKampus) {
+
+        Log.i(TAG, "MainActivity.onUserSelected : " + idKampus);
+        //Fragment fragment = new UserFragment();
+        Fragment fragment = KampusFragment.newInstance(idKampus);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit();
+
+    }
 }

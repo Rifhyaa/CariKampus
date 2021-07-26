@@ -72,14 +72,15 @@ public class ProdiFragment extends Fragment {
 
             }
         });
+
+        Log.i(TAG, TAG + ".onCreateView() Success");
+
         return v;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        Log.i(TAG, TAG + ".onViewCreated");
         mProdiDetailViewModel.getProdiLiveData().observe(
                 getViewLifecycleOwner(),
                 new Observer<Prodi>() {
@@ -91,5 +92,7 @@ public class ProdiFragment extends Fragment {
                 }
         );
         mProdiDetailViewModel.loadProdi(mProdiId);
+
+        Log.i(TAG, TAG + ".onViewCreated() Success");
     }
 }

@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
-import id.carikampus.data.model.Kampus;
+import id.carikampus.model.Kampus;
 import id.carikampus.repository.KampusRepository;
 
 public class KampusDetailViewModel extends ViewModel {

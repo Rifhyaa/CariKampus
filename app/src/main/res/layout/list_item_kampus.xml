@@ -2,45 +2,136 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/card"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
-    app:cardCornerRadius="15dp"
-    android:layout_margin="10dp">
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/indicator_inactive"
-        android:padding="10dp">
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:elevation="4dp"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/foto_logo_kampus"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="15dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/undraw_void" />
 
         <TextView
             android:id="@+id/text_nama_kampus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:text="nama_kampus"
-            android:textStyle="bold" />
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/foto_logo_kampus"
+            android:layout_marginBottom="5dp"
+            android:text="Nama Kampus"
+            android:textSize="20sp"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/text_total_prodi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/text_name_campus"
-            android:text="total_prodi"
-            android:layout_marginLeft="10dp" />
+            android:layout_below="@+id/text_nama_kampus"
+            android:layout_toEndOf="@+id/foto_logo_kampus"
+            android:text="Total Prodi"
+            android:textColor="#8b8b8b"
+            android:layout_marginBottom="5dp"/>
 
         <TextView
             android:id="@+id/text_akreditasi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/total_program_studi"
-            android:text="nilai_akreditasi"
-            android:layout_marginLeft="10dp" />
+            android:layout_below="@+id/text_total_prodi"
+            android:layout_toEndOf="@+id/foto_logo_kampus"
+            android:text="Akreditasi Kampus"
+            android:layout_marginBottom="5dp" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/text_total_disukai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_akreditasi"
+            android:layout_toEndOf="@+id/foto_logo_kampus"
+            android:text="10 Orang Menyukai"
+            android:layout_marginBottom="5dp" />
+
+    </RelativeLayout>
+<!--        <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:padding="8dp"-->
+<!--        android:orientation="vertical">-->
+<!--            <TextView-->
+<!--            android:id="@+id/txtName"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:padding="1dp"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="18sp" />-->
+<!--            <TextView-->
+<!--            android:id="@+id/txtDistance"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:padding="1dp"-->
+<!--            android:textColor="@color/black" />-->
+<!--            <TextView-->
+<!--            android:id="@+id/txtGravity"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:padding="1dp"-->
+<!--            android:textColor="@color/black" />-->
+<!--            <TextView-->
+<!--            android:id="@+id/txtDiameter"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:padding="1dp"-->
+<!--            android:textColor="@color/black" />-->
+<!--        </LinearLayout>-->
+
+<!--    <LinearLayout-->
+<!--        android:orientation="vertical"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background="@color/indicator_inactive"-->
+<!--        android:padding="10dp">-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/text_nama_kampus"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="24sp"-->
+<!--            android:text="nama_kampus"-->
+<!--            android:textStyle="bold" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/text_total_prodi"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/text_name_campus"-->
+<!--            android:text="total_prodi"-->
+<!--            android:layout_marginLeft="10dp" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/text_akreditasi"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/total_program_studi"-->
+<!--            android:text="nilai_akreditasi"-->
+<!--            android:layout_marginLeft="10dp" />-->
+
+<!--        -->
+
+<!--    </LinearLayout>-->
 
 </com.google.android.material.card.MaterialCardView>

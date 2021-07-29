@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import id.carikampus.R;
-import id.carikampus.data.model.OnBoarding;
+import id.carikampus.model.OnBoarding;
 
 public class OnBoardingFragment extends Fragment {
 

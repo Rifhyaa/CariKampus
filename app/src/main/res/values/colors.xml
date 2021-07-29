@@ -22,4 +22,16 @@
     <color name="indicator_active">#50C2C9</color>
     <color name="indicator_inactive">#C4C4C4</color>
 
+    <!-- Circle Page Indicator -->
+    <color name="default_circle_indicator_fill_color">@color/app_primary</color>
+    <color name="default_circle_indicator_page_color">@color/carikampus_grey</color>
+    <color name="default_circle_indicator_stroke_color">@android:color/transparent</color>
+
+    <color name="blackTextColor">#000</color>
+    <color name="colorLoginPrimaryDark">#FDFFFF</color>
+
+    <color name="df_transparent_black_background">#80000000</color>
+    <color name="whiteCardColor">#fff</color>
+    <color name="whiteTextColor">#fff</color>
+
 </resources>

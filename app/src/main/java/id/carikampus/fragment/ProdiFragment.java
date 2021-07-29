@@ -13,10 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import org.w3c.dom.Text;
-
 import id.carikampus.R;
-import id.carikampus.data.model.Prodi;
+import id.carikampus.model.Prodi;
 import id.carikampus.viewmodel.ProdiDetailViewModel;
 
 public class ProdiFragment extends Fragment {

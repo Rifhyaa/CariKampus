@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.List;
 
 import id.carikampus.helper.CariKampusMethods;
-import id.carikampus.data.model.Prodi;
+import id.carikampus.model.Prodi;
 import id.carikampus.rest.ApiUtils;
 import id.carikampus.service.ProdiService;
 import retrofit2.Call;

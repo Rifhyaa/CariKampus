@@ -3,6 +3,7 @@
     package="id.carikampus">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".application.CariKampusApplication"
@@ -13,11 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CariKampus"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CariKampusActivity"></activity>
-        <activity android:name=".DashboardActivity"></activity>
-        <activity
-            android:name=".ui.login.LoginActivity"
-            android:label="@string/title_activity_login" />
+        <activity android:name=".LoginActivity" />
         <activity android:name=".IntroductionActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

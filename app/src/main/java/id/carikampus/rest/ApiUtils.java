@@ -1,5 +1,6 @@
 package id.carikampus.rest;
 
+import id.carikampus.service.FotoKampusService;
 import id.carikampus.service.KampusService;
 import id.carikampus.service.ProdiService;
 
@@ -22,5 +23,9 @@ public class ApiUtils {
 
     public static KampusService getKampusService() {
         return RetrofitClient.getClient(API_URL).create(KampusService.class);
+    }
+
+    public static FotoKampusService getFotoKampusService() {
+        return RetrofitClient.getClient(API_URL).create(FotoKampusService.class);
     }
 }

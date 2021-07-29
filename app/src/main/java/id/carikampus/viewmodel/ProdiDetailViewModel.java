@@ -25,16 +25,14 @@ public class ProdiDetailViewModel extends ViewModel {
     }
 
     public void loadProdi(int idProdi) {
-        Log.i(TAG, "loadProdi: called");
         mIdMutableLiveData.setValue(idProdi);
+
+        Log.i(TAG, TAG + ".loadProdi() Success");
     }
 
     public LiveData<Prodi> getProdiLiveData() {
-        Log.i(TAG, "getProdiLiveData: called");
+        Log.i(TAG, TAG + ".getProdiLiveData() Success");
+
         return mProdiLiveData;
     }
-
-//    public void saveUser(User user) {
-//        mUserRepository.updateUser(user);
-//    }
 }

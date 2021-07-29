@@ -22,6 +22,7 @@
             android:layout_marginLeft="10dp"
             android:textColor="@color/black"
             android:textSize="24sp"
+            android:text="nama_kampus"
             android:textStyle="bold" />
 
         <TextView
@@ -29,6 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/text_name_campus"
+            android:text="total_prodi"
             android:layout_marginLeft="10dp" />
 
         <TextView
@@ -36,6 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/total_program_studi"
+            android:text="nilai_akreditasi"
             android:layout_marginLeft="10dp" />
 
     </LinearLayout>

@@ -57,5 +57,27 @@ public class KampusRepository {
 
         return kampusList;
     }
+
+    public MutableLiveData<Kampus> getKampusById(int id) {
+        MutableLiveData<Kampus> kampus = new MutableLiveData<>();
+
+        Call<Kampus> call = mKampusService.getKampusById(id);
+        call.enqueue(new Callback<Kampus>() {
+            @Override
+            public void onResponse(Call<Kampus> call, Response<Kampus> response) {
+                if (response.isSuccessful()) {
+                    kampus.setValue(response.body());
+                    CariKampusMethods.printLog(TAG, "getKampusById.onResponse() Called!");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Kampus> call, Throwable t) {
+                Log.e(TAG, "onFailure: " + t.getMessage());
+            }
+        });
+
+        return kampus;
+    }
 }
 

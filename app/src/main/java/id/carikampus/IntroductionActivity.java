@@ -16,6 +16,7 @@ import com.google.android.material.button.MaterialButton;
 
 import id.carikampus.fragment.OnBoardingFragment;
 import id.carikampus.helper.CariKampusMethods;
+import id.carikampus.helper.Preferences;
 
 public class IntroductionActivity extends AppCompatActivity {
 
@@ -28,9 +29,14 @@ public class IntroductionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        if (Preferences.getIntroductionStatus(this)) {
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            finish();
+        }
+
         super.onCreate(savedInstanceState);
         this.getSupportActionBar().hide();
-
         setContentView(R.layout.activity_introduction);
 
         mLayoutOnBoarding = findViewById(R.id.layoutOnboardingIndicators);
@@ -54,7 +60,8 @@ public class IntroductionActivity extends AppCompatActivity {
                 if (mOnBoardingViewPager.getCurrentItem() + 1 < mOnBoardingAdapter.getItemCount()) {
                     mOnBoardingViewPager.setCurrentItem(mOnBoardingViewPager.getCurrentItem() + 1);
                 } else {
-                    startActivity(new Intent(getApplicationContext(), CariKampusActivity.class));
+                    Preferences.setIntroductionStatus(getApplicationContext(), true);
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                     finish();
                 }
             }

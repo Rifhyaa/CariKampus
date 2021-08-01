@@ -1,4 +1,4 @@
-package id.carikampus.data.model;
+package id.carikampus.model;
 
 import com.google.gson.annotations.Expose;
 
@@ -51,6 +51,9 @@ public class Kampus {
 
     @Expose
     private Integer status;
+
+    @Expose
+    private String foto_logo;
 
     public Integer getId() {
         return id;
@@ -178,5 +181,13 @@ public class Kampus {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getFoto_logo() {
+        return foto_logo;
+    }
+
+    public void setFoto_logo(String foto_logo) {
+        this.foto_logo = foto_logo;
     }
 }

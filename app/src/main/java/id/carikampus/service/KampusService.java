@@ -2,8 +2,7 @@ package id.carikampus.service;
 
 import java.util.List;
 
-import id.carikampus.data.model.Kampus;
-import id.carikampus.data.model.Prodi;
+import id.carikampus.model.Kampus;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;

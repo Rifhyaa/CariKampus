@@ -1,4 +1,4 @@
-package id.carikampus.data.model;
+package id.carikampus.model;
 
 import com.google.gson.annotations.Expose;
 

@@ -1,4 +1,4 @@
-package id.carikampus.data.model;
+package id.carikampus.model;
 
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository

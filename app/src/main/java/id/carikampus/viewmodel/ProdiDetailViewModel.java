@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
-import id.carikampus.data.model.Prodi;
+import id.carikampus.model.Prodi;
 import id.carikampus.repository.ProdiRepository;
 
 public class ProdiDetailViewModel extends ViewModel {

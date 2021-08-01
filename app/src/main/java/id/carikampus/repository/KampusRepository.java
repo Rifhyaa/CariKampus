@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
-import id.carikampus.data.model.Kampus;
+import id.carikampus.model.Kampus;
 import id.carikampus.helper.CariKampusMethods;
 import id.carikampus.rest.ApiUtils;
 import id.carikampus.service.KampusService;

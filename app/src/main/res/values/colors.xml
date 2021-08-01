@@ -14,6 +14,14 @@
 
     <color name="carikampus_grey">#A5A0A0</color>
 
+    // Palatte colors
+    <color name="theme_primary">#FB770D</color>
+    <color name="theme_primary_500">#FF8532</color>
+    <color name="theme_black">#25414C</color>
+    <color name="theme_muted">#FFEBDB</color>
+    <color name="theme_primary_muted">#FFA45B</color>
+    <color name="theme_grey">#999C9B</color>
+
     // Onboarding colors
     <color name="onboarding_background">#E0E0E4</color>
     <color name="onboarding_button">#FF8532</color>
@@ -21,5 +29,17 @@
     // Indicator colors
     <color name="indicator_active">#50C2C9</color>
     <color name="indicator_inactive">#C4C4C4</color>
+
+    <!-- Circle Page Indicator -->
+    <color name="default_circle_indicator_fill_color">@color/app_primary</color>
+    <color name="default_circle_indicator_page_color">@color/carikampus_grey</color>
+    <color name="default_circle_indicator_stroke_color">@android:color/transparent</color>
+
+    <color name="blackTextColor">#000</color>
+    <color name="colorLoginPrimaryDark">#FDFFFF</color>
+
+    <color name="df_transparent_black_background">#80000000</color>
+    <color name="whiteCardColor">#fff</color>
+    <color name="whiteTextColor">#fff</color>
 
 </resources>

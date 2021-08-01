@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
-import id.carikampus.data.model.Kampus;
+import id.carikampus.model.Kampus;
 import id.carikampus.repository.KampusRepository;
 
 public class KampusListViewModel extends ViewModel {

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import id.carikampus.R;
-import id.carikampus.data.model.OnBoarding;
+import id.carikampus.model.OnBoarding;
 
 public class CariKampusMethods {
 

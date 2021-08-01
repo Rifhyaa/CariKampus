@@ -13,6 +13,7 @@ import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import id.carikampus.fragment.DashboardFragment;
 import id.carikampus.fragment.KampusFragment;
 import id.carikampus.fragment.KampusListFragment;
 import id.carikampus.fragment.ProdiFragment;
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements KampusListFragmen
         switch (item.getItemId()) {
             case R.id.home_menu:
                 Log.d(TAG,  "Home Item");
-                fragment = KampusListFragment.newInstance();
+                fragment = new DashboardFragment();
                 break;
             case R.id.school_menu:
                 Log.d(TAG,  "School Item");

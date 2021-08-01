@@ -2,7 +2,7 @@ package id.carikampus.model;
 
 import com.google.gson.annotations.Expose;
 
-public class User {
+public class UserLogin {
 
     @Expose
     private int id;

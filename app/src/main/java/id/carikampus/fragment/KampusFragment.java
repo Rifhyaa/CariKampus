@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -42,42 +43,50 @@ public class KampusFragment extends Fragment {
     private int mKampusId;
 
     // Fragment
-    private TextInputEditText mNamaKampusText;
-    private TextInputEditText mSingkatanText;
-    private TextInputEditText mAkreditasiText;
-    private TextInputEditText mTotalProdiText;
-    private TextInputEditText mTotalDosenText;
-    private TextInputEditText mBiayaSemesterMinimalText;
-    private TextInputEditText mBiayaSemesterMaksimalText;
-    private TextInputEditText mAlamatText;
-    private TextInputEditText mTeleponText;
-    private TextInputEditText mWebsiteText;
-    private TextInputEditText mEmailText;
+    TextInputEditText mNamaKampusText;
+    TextInputEditText mSingkatanText;
+    TextInputEditText mAkreditasiText;
+    TextInputEditText mTotalProdiText;
+    TextInputEditText mTotalDosenText;
+    TextInputEditText mBiayaSemesterMinimalText;
+    TextInputEditText mBiayaSemesterMaksimalText;
+    TextInputEditText mAlamatText;
+    TextInputEditText mTeleponText;
+    TextInputEditText mWebsiteText;
+    TextInputEditText mEmailText;
+    TextInputLayout mTextLayoutTotalProdi;
 
     // View Pager For Images
     ViewPager viewPager;
     ImagePagerAdapter imagePagerAdapter;
     Timer timer;
 
+    ArrayList<String> myString;
+
     public KampusFragment() {
         // Required empty public constructor
+    }
+
+    public interface Callbacks {
+        public void onProdiSelected(int idKampus);
     }
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         Log.i(TAG, "onAttach called");
-        mContext =  context;
+        mCallbacks = (Callbacks) context;
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         Log.i(TAG, "onDetach called");
-        mContext = null;
+        timer.cancel();
+        mCallbacks = null;
     }
 
-    private Context mContext = null;
+    private Callbacks mCallbacks = null;
 
     public KampusDetailViewModel getKampusDetailViewModel() {
         if (mKampusDetailViewModel == null) {
@@ -166,6 +175,15 @@ public class KampusFragment extends Fragment {
         mWebsiteText = (TextInputEditText) v.findViewById(R.id.website);
         mEmailText = (TextInputEditText) v.findViewById(R.id.email);
 
+        mTextLayoutTotalProdi = v.findViewById(R.id.til_total_prodi);
+        mTextLayoutTotalProdi.setEndIconOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View view) {
+                // do something.
+                mCallbacks.onProdiSelected(mKampus.getId());
+                myString.clear();
+            }
+        });
+
         viewPager = (ViewPager) v.findViewById(R.id.pager);
         CirclePageIndicator pagerIndicator = (CirclePageIndicator) v.findViewById(R.id.indicator);
 
@@ -193,7 +211,7 @@ public class KampusFragment extends Fragment {
 
     private void getImagesString(MutableLiveData<List<FotoKampus>> list) {
         String imageUri = "http://192.168.100.140:8080/uploads/img_kampus/";
-        ArrayList<String> myString = new ArrayList<>();
+        myString = new ArrayList<>();
         List<FotoKampus> temp;
         Log.d(TAG, "Cek list " + list.toString());
 
@@ -220,8 +238,12 @@ public class KampusFragment extends Fragment {
 
     class SliderTimer extends TimerTask {
 
+
         @Override
         public void run() {
+            if (getActivity() == null) {
+                return;
+            }
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {

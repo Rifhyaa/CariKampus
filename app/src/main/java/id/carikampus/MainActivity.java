@@ -18,7 +18,7 @@ import id.carikampus.fragment.KampusFragment;
 import id.carikampus.fragment.KampusListFragment;
 import id.carikampus.fragment.ProdiFragment;
 
-public class MainActivity extends AppCompatActivity implements KampusListFragment.Callbacks, BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements KampusListFragment.Callbacks, BottomNavigationView.OnNavigationItemSelectedListener, KampusFragment.Callbacks {
 
     private static final String TAG = "MainActivity";
 
@@ -82,6 +82,18 @@ public class MainActivity extends AppCompatActivity implements KampusListFragmen
     public void onKampusSelected(int idKampus) {
         Log.i(TAG, "MainActivity.onKampusSelected : " + idKampus);
         Fragment fragment = KampusFragment.newInstance(idKampus);
+        findViewById(R.id.cari_kampus).setVisibility(View.GONE);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit();
+
+    }
+
+    @Override
+    public void onProdiSelected(int idKampus) {
+        Log.i(TAG, "MainActivity.onProdiSelected : " + idKampus);
+        Fragment fragment = new ProdiFragment();
         findViewById(R.id.cari_kampus).setVisibility(View.GONE);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, fragment)

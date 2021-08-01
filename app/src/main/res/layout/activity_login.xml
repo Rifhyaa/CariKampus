@@ -51,7 +51,7 @@
             android:layout_height="200dp"
             android:scaleType="centerInside"
             app:srcCompat="@drawable/undraw_login"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="10dp"/>
 
         <TextView
             android:id="@+id/text_login"
@@ -79,7 +79,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-
             app:startIconDrawable="@drawable/ic_outline_person_24"
             app:endIconMode="clear_text"
             app:errorEnabled="true"
@@ -106,6 +105,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password"
+                android:inputType="textPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

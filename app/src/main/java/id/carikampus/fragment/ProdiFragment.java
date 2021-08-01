@@ -62,7 +62,7 @@ public class ProdiFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mProdi.setNama_prodi(s.toString());
+
             }
 
             @Override

@@ -46,6 +46,11 @@ public class Preferences {
         editor.apply();
     }
 
+    public static void clearPreferences(Context context) {
+        SharedPreferences.Editor editor = getSharedPreference(context).edit();
+        editor.clear().commit();
+    }
+
     public static int getIdUser(Context context){
         return getSharedPreference(context).getInt(KEY_ID_USER,0);
     }

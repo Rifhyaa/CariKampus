@@ -1,12 +1,14 @@
 package id.carikampus.model;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class KampusFavorit {
 
     @Expose
     private int id;
 
+    @SerializedName("id_kampus")
     @Expose
     private int id_kampus;
 

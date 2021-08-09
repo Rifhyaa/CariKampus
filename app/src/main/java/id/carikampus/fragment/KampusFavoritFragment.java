@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,7 +24,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,9 +37,9 @@ import id.carikampus.model.KampusFavorit;
 import id.carikampus.viewmodel.KampusFavoritViewModel;
 import id.carikampus.viewmodel.KampusListViewModel;
 
-public class KampusListFragment extends Fragment {
+public class KampusFavoritFragment extends Fragment {
 
-    private static final String TAG = "KampusListFragment";
+    private static final String TAG = "KampusFavoritFragment";
     private static final String ARG_USER_ID = "id_user";
 
     private KampusListViewModel mKampusListViewModel;
@@ -90,17 +88,8 @@ public class KampusListFragment extends Fragment {
     }
 
     // Instance
-    public static KampusListFragment newInstance() {
-        KampusListFragment fragment = new KampusListFragment();
-        Bundle args = new Bundle();
-        args.putSerializable(ARG_USER_ID, "0");
-        fragment.setArguments(args);
-
-        return fragment;
-    }
-
-    public static KampusListFragment newInstance(int idUser) {
-        KampusListFragment fragment = new KampusListFragment();
+    public static KampusFavoritFragment newInstance(int idUser) {
+        KampusFavoritFragment fragment = new KampusFavoritFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_USER_ID, idUser);
         fragment.setArguments(args);
@@ -137,9 +126,7 @@ public class KampusListFragment extends Fragment {
         mKampusFavoritViewModel = new ViewModelProvider(this).get(KampusFavoritViewModel.class);
         mAdapter = new KampusAdapter(Collections.<Kampus>emptyList());
 
-        if (getArguments().getSerializable(ARG_USER_ID) != "0") {
-            mUserId = (int) getArguments().getSerializable(ARG_USER_ID);
-        }
+        mUserId = (int) getArguments().getSerializable(ARG_USER_ID);
 
         Log.i(TAG, TAG + ".onCreate() Success");
     }
@@ -181,7 +168,7 @@ public class KampusListFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.i(TAG, "KampusListFragment.onViewCreated() Called!");
+        Log.i(TAG, "onViewCreated() Called!");
 
         if (getArguments().getSerializable(ARG_USER_ID).equals("0")) {
             mKampusListViewModel.getListKampus().observe(

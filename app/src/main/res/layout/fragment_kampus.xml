@@ -23,6 +23,36 @@
 
             </RelativeLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="10dp"
+                android:paddingVertical="5dp"
+                android:background="@drawable/border_bottom_1_grey">
+
+                <TextView
+                    android:id="@+id/total_favorite"
+                    android:layout_width="0dp"
+                    android:layout_height="24dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="10 Menyukai Ini" />
+
+
+                <ToggleButton
+                    android:id="@+id/button_favorite"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/button_favorite"
+                    android:checked="false"
+                    android:enabled="false"
+                    android:text=""
+                    android:textOff=""
+                    android:textOn="" />
+            </LinearLayout>
+
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -111,6 +141,7 @@
                         app:startIconDrawable="@drawable/ic_baseline_business_24"
                         app:endIconMode="custom"
                         app:endIconDrawable="@drawable/ic_baseline_keyboard_arrow_right_primary_24"
+                        app:endIconContentDescription="Lihat detail prodi"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         app:boxStrokeWidth="0dp"
                         app:boxStrokeWidthFocused="0dp"
@@ -193,10 +224,14 @@
                     android:orientation="vertical">
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_alamat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:startIconDrawable="@drawable/ic_baseline_location_on_24"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:endIconMode="custom"
+                        app:endIconDrawable="@drawable/ic_baseline_keyboard_arrow_right_primary_24"
+                        app:endIconContentDescription="Lihat lokasi"
                         app:boxStrokeWidth="0dp"
                         app:boxStrokeWidthFocused="0dp"
                         android:layout_marginTop="10dp"
@@ -211,10 +246,13 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_telepon"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:startIconDrawable="@drawable/ic_baseline_local_phone_24"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:endIconMode="custom"
+                        app:endIconDrawable="@drawable/ic_baseline_keyboard_arrow_right_primary_24"
                         app:boxStrokeWidth="0dp"
                         app:boxStrokeWidthFocused="0dp"
                         android:hint="Telepon">
@@ -228,10 +266,13 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_website"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:startIconDrawable="@drawable/ic_baseline_web_24"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:endIconMode="custom"
+                        app:endIconDrawable="@drawable/ic_baseline_keyboard_arrow_right_primary_24"
                         app:boxStrokeWidth="0dp"
                         app:boxStrokeWidthFocused="0dp"
                         android:hint="Website">
@@ -245,10 +286,13 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:startIconDrawable="@drawable/ic_baseline_email_24"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:endIconMode="custom"
+                        app:endIconDrawable="@drawable/ic_baseline_keyboard_arrow_right_primary_24"
                         app:boxStrokeWidth="0dp"
                         app:boxStrokeWidthFocused="0dp"
                         android:hint="Email">

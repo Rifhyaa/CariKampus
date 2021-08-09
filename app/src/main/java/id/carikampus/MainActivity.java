@@ -17,6 +17,8 @@ import id.carikampus.fragment.DashboardFragment;
 import id.carikampus.fragment.KampusFragment;
 import id.carikampus.fragment.KampusListFragment;
 import id.carikampus.fragment.ProdiFragment;
+import id.carikampus.fragment.ProdiListFragment;
+import id.carikampus.helper.Preferences;
 
 public class MainActivity extends AppCompatActivity implements KampusListFragment.Callbacks, BottomNavigationView.OnNavigationItemSelectedListener, KampusFragment.Callbacks {
 
@@ -25,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements KampusListFragmen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_list_kampus);
+        setContentView(R.layout.activity_main);
         this.getSupportActionBar().hide();
 
         BottomNavigationView mBottomNav = findViewById(R.id.bottom_navigation_view);
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements KampusListFragmen
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragment_container);
         if (fragment == null) {
-            fragment = KampusListFragment.newInstance();
+            fragment = new DashboardFragment();
             fm.beginTransaction().add(R.id.fragment_container, fragment)
                     .commit();
         }
@@ -51,16 +53,15 @@ public class MainActivity extends AppCompatActivity implements KampusListFragmen
                 break;
             case R.id.school_menu:
                 Log.d(TAG,  "School Item");
-                findViewById(R.id.cari_kampus).setVisibility(View.VISIBLE);
                 fragment = KampusListFragment.newInstance();
                 break;
             case R.id.favorite_menu:
                 Log.d(TAG,  "Favorite Item");
-                fragment = new ProdiFragment();
+                fragment = KampusListFragment.newInstance(Preferences.getIdUser(getApplicationContext()));
                 break;
             case R.id.person_menu:
                 Log.d(TAG,  "Person Item");
-                fragment = KampusFragment.newInstance(1);
+                fragment = new DashboardFragment();
                 break;
             default:
         }
@@ -69,7 +70,6 @@ public class MainActivity extends AppCompatActivity implements KampusListFragmen
 
     private boolean loadFragment(Fragment fragment) {
         if (fragment != null) {
-//                fragment = new ProdiFragment();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, fragment)
                     .commit();
@@ -82,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements KampusListFragmen
     public void onKampusSelected(int idKampus) {
         Log.i(TAG, "MainActivity.onKampusSelected : " + idKampus);
         Fragment fragment = KampusFragment.newInstance(idKampus);
-        findViewById(R.id.cari_kampus).setVisibility(View.GONE);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)
@@ -93,8 +92,7 @@ public class MainActivity extends AppCompatActivity implements KampusListFragmen
     @Override
     public void onProdiSelected(int idKampus) {
         Log.i(TAG, "MainActivity.onProdiSelected : " + idKampus);
-        Fragment fragment = new ProdiFragment();
-        findViewById(R.id.cari_kampus).setVisibility(View.GONE);
+        Fragment fragment = ProdiListFragment.newInstance(idKampus);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)

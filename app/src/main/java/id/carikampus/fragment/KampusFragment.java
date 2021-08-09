@@ -1,10 +1,13 @@
 package id.carikampus.fragment;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -14,6 +17,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -25,47 +32,65 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import id.carikampus.R;
+import id.carikampus.helper.CariKampusMethods;
+import id.carikampus.helper.Preferences;
 import id.carikampus.model.FotoKampus;
 import id.carikampus.model.Kampus;
 import id.carikampus.helper.CirclePageIndicator;
 import id.carikampus.helper.ImagePagerAdapter;
+import id.carikampus.model.KampusFavorit;
 import id.carikampus.repository.FotoKampusRepository;
+import id.carikampus.viewmodel.FotoKampusViewModel;
 import id.carikampus.viewmodel.KampusDetailViewModel;
+import id.carikampus.viewmodel.KampusFavoritViewModel;
 
 public class KampusFragment extends Fragment {
 
     private static final String ARG_KAMPUS_ID = "id_kampus";
     private static final String TAG = "KampusFragment";
 
-    private Kampus mKampus;
-    private KampusDetailViewModel mKampusDetailViewModel;
     private int mKampusId;
+    private int mUserId;
 
-    // Fragment
-    TextInputEditText mNamaKampusText;
-    TextInputEditText mSingkatanText;
-    TextInputEditText mAkreditasiText;
-    TextInputEditText mTotalProdiText;
-    TextInputEditText mTotalDosenText;
-    TextInputEditText mBiayaSemesterMinimalText;
-    TextInputEditText mBiayaSemesterMaksimalText;
-    TextInputEditText mAlamatText;
-    TextInputEditText mTeleponText;
-    TextInputEditText mWebsiteText;
-    TextInputEditText mEmailText;
-    TextInputLayout mTextLayoutTotalProdi;
+    private Kampus mKampus;
+    private List<KampusFavorit> mKampusFavorits;
+    private KampusDetailViewModel mKampusDetailViewModel;
+    private FotoKampusViewModel mFotoKampusViewModel;
+
+    // Fragment Component
+    private TextInputEditText mNamaKampusText;
+    private TextInputEditText mSingkatanText;
+    private TextInputEditText mAkreditasiText;
+    private TextInputEditText mTotalProdiText;
+    private TextInputEditText mTotalDosenText;
+    private TextInputEditText mBiayaSemesterMinimalText;
+    private TextInputEditText mBiayaSemesterMaksimalText;
+    private TextInputEditText mAlamatText;
+    private TextInputEditText mTeleponText;
+    private TextInputEditText mWebsiteText;
+    private TextInputEditText mEmailText;
+
+    private TextView mTotalFavoritTextView;
+    private ToggleButton mToggleButton;
+
+    private TextInputLayout mTextLayoutTotalProdi;
+    private TextInputLayout mTextLayoutAlamat;
+    private TextInputLayout mTextLayoutTelepon;
+    private TextInputLayout mTextLayoutWebsite;
+    private TextInputLayout mTextLayoutEmail;
 
     // View Pager For Images
-    ViewPager viewPager;
-    ImagePagerAdapter imagePagerAdapter;
-    Timer timer;
-
-    ArrayList<String> myString;
+    private ViewPager viewPager;
+    private ImagePagerAdapter imagePagerAdapter;
+    private Timer timer;
 
     public KampusFragment() {
         // Required empty public constructor
     }
+
+    private Callbacks mCallbacks = null;
 
     public interface Callbacks {
         public void onProdiSelected(int idKampus);
@@ -82,12 +107,10 @@ public class KampusFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         Log.i(TAG, "onDetach called");
-        timer.cancel();
         mCallbacks = null;
     }
 
-    private Callbacks mCallbacks = null;
-
+    // ViewModel Init
     public KampusDetailViewModel getKampusDetailViewModel() {
         if (mKampusDetailViewModel == null) {
             mKampusDetailViewModel = new ViewModelProvider(this)
@@ -97,38 +120,92 @@ public class KampusFragment extends Fragment {
         return mKampusDetailViewModel;
     }
 
-    // TODO: Rename and change types and number of parameters
+    public FotoKampusViewModel getFotoKampusViewModel() {
+        if (mFotoKampusViewModel == null) {
+            mFotoKampusViewModel = new ViewModelProvider(this)
+                    .get(FotoKampusViewModel.class);
+        }
+
+        return mFotoKampusViewModel;
+    }
+
     public static KampusFragment newInstance(int kampusId) {
         KampusFragment fragment = new KampusFragment();
         Bundle args = new Bundle();
-        args.putSerializable(ARG_KAMPUS_ID, kampusId);
+        args.putInt(ARG_KAMPUS_ID, kampusId);
         fragment.setArguments(args);
         return fragment;
     }
 
     private void updateUI() {
-        Locale myIndonesianLocale = new Locale("in", "ID");
-        NumberFormat formater = NumberFormat.getCurrencyInstance(myIndonesianLocale);
-
         Log.i(TAG, TAG + ".updateUI: called");
         mNamaKampusText.setText(mKampus.getNama_kampus());
         mSingkatanText.setText(mKampus.getSingkatan());
         mAkreditasiText.setText("Akreditasi " + mKampus.getAkreditasi());
         mTotalProdiText.setText(mKampus.getTotal_prodi() + " Prodi");
         mTotalDosenText.setText(mKampus.getTotal_dosen() + " Dosen");
-        mBiayaSemesterMinimalText.setText(formater.format(mKampus.getBiaya_semester_minimal()));
-        mBiayaSemesterMaksimalText.setText(formater.format(mKampus.getBiaya_semester_maksimal()));
+        mBiayaSemesterMinimalText.setText(CariKampusMethods.getNumberFormat().format(mKampus.getBiaya_semester_minimal()));
+        mBiayaSemesterMaksimalText.setText(CariKampusMethods.getNumberFormat().format(mKampus.getBiaya_semester_maksimal()));
         mAlamatText.setText(mKampus.getAlamat());
         mTeleponText.setText(mKampus.getTelepon());
         mWebsiteText.setText(mKampus.getWebsite());
         mEmailText.setText(mKampus.getEmail());
 
-        ArrayList<String> imagesString = new ArrayList<>();
-        FotoKampusRepository mFotoKampusRepository = FotoKampusRepository.get();
+        mTotalFavoritTextView.setText(CariKampusMethods.getTotalFavoritByStatus(mKampusFavorits) + " Favorits");
 
+        mToggleButton.setChecked(CariKampusMethods.isUserFavoriteIt(mKampusFavorits, mUserId));
+        mToggleButton.setEnabled(true);
 
-        getImagesString(mFotoKampusRepository.getListFotoKampus(mKampus.getId()));
+        getImagesString(mFotoKampusViewModel.getDetailKampusFavorit(mKampusId));
 
+        mToggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                KampusFavorit myKampusFavorit = new KampusFavorit();
+                myKampusFavorit.setId_kampus(mKampusId);
+                myKampusFavorit.setId_user_login(mUserId);
+                myKampusFavorit.setStatus(isChecked ? 1 : 0);
+
+                updateFavorit(myKampusFavorit);
+            }
+        });
+    }
+
+    private void updateFavorit(KampusFavorit kampusFavorit) {
+
+        Log.d(TAG, "ID KAMPUS : " + mKampusId + " USER ID : " + mUserId);
+
+        mKampusDetailViewModel.saveKampusFavorit(kampusFavorit).observe(
+                getViewLifecycleOwner(),
+                new Observer<KampusFavorit>() {
+                    @Override
+                    public void onChanged(KampusFavorit kampusFavorit) {
+                        if (kampusFavorit.getStatus() == 1) {
+                            new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE)
+                                    .setTitleText("Berhasil")
+                                    .setContentText("Kampus difavoritkan")
+                                    .show();
+                        }
+                        else {
+                            new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE)
+                                    .setTitleText("Berhasil")
+                                    .setContentText("Kampus tidak difavoritkan")
+                                    .show();
+                        }
+
+                    }
+                });
+
+        mKampusDetailViewModel.getDetailKampusFavorit(mKampusId).observe(
+                getViewLifecycleOwner(),
+                new Observer<List<KampusFavorit>>() {
+                    @Override
+                    public void onChanged(List<KampusFavorit> kampusFavorits) {
+                        mKampusFavorits = kampusFavorits;
+                        mTotalFavoritTextView.setText(CariKampusMethods.getTotalFavoritByStatus(mKampusFavorits) + " Favorits");
+                    }
+                }
+        );
     }
 
     @Override
@@ -136,9 +213,12 @@ public class KampusFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "onCreate() called");
         mKampusId = (int) getArguments().getSerializable(ARG_KAMPUS_ID);
+        Preferences.setIdKampus(getContext(), (int) getArguments().getSerializable(ARG_KAMPUS_ID));
         Log.i(TAG, "args bundle is : " + mKampusId);
+        mUserId = Preferences.getIdUser(getContext());
         mKampus = new Kampus();
         mKampusDetailViewModel = getKampusDetailViewModel();
+        mFotoKampusViewModel = getFotoKampusViewModel();
     }
 
     @Override
@@ -146,7 +226,18 @@ public class KampusFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         Log.i(TAG, "UserFragment.onViewCreated: called");
-        mKampusDetailViewModel.getKampusLiveData().observe(
+        mKampusDetailViewModel.getDetailKampusFavorit(mKampusId).observe(
+                getViewLifecycleOwner(),
+                new Observer<List<KampusFavorit>>() {
+                    @Override
+                    public void onChanged(List<KampusFavorit> kampusFavorits) {
+                        mKampusFavorits = kampusFavorits;
+                        Log.d(TAG, TAG + "Got Total Favorits: " + kampusFavorits.size());
+                    }
+                }
+        );
+
+        mKampusDetailViewModel.getKampusLiveData(mKampusId).observe(
                 getViewLifecycleOwner(),
                 new Observer<Kampus>() {
                     @Override
@@ -156,13 +247,11 @@ public class KampusFragment extends Fragment {
                     }
                 }
         );
-        mKampusDetailViewModel.loadKampus(mKampusId);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_kampus, container, false);
-
         mNamaKampusText = (TextInputEditText) v.findViewById(R.id.nama_kampus);
         mSingkatanText = (TextInputEditText) v.findViewById(R.id.singkatan);
         mAkreditasiText = (TextInputEditText) v.findViewById(R.id.akreditasi);
@@ -175,91 +264,114 @@ public class KampusFragment extends Fragment {
         mWebsiteText = (TextInputEditText) v.findViewById(R.id.website);
         mEmailText = (TextInputEditText) v.findViewById(R.id.email);
 
+        mTotalFavoritTextView = (TextView) v.findViewById(R.id.total_favorite);
+        mToggleButton = (ToggleButton) v.findViewById(R.id.button_favorite);
+
         mTextLayoutTotalProdi = v.findViewById(R.id.til_total_prodi);
-        mTextLayoutTotalProdi.setEndIconOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View view) {
-                // do something.
-                mCallbacks.onProdiSelected(mKampus.getId());
-                myString.clear();
-            }
-        });
+        mTextLayoutAlamat = v.findViewById(R.id.til_alamat);
+        mTextLayoutTelepon = v.findViewById(R.id.til_telepon);
+        mTextLayoutWebsite = v.findViewById(R.id.til_website);
+        mTextLayoutEmail = v.findViewById(R.id.til_email);
 
         viewPager = (ViewPager) v.findViewById(R.id.pager);
         CirclePageIndicator pagerIndicator = (CirclePageIndicator) v.findViewById(R.id.indicator);
-
         imagePagerAdapter = new ImagePagerAdapter(v.getContext());
-
-        // Hide
-        View view = inflater.inflate(R.layout.fragment_list_kampus, container, false);
-        view.findViewById(R.id.cari_kampus).setVisibility(View.GONE);
 
         viewPager.setAdapter(imagePagerAdapter);
         pagerIndicator.setViewPager(viewPager);
 
-
-//        ArrayList<String> images = new ArrayList<>();
-//        images.add("https://ie.binus.ac.id/files/2015/04/DSC06004UPDATE.jpg");
-//        images.add("https://lh3.googleusercontent.com/p/AF1QipMyvbMxpApPuPJ88Y-cH-N_N2z1a83f3-OfbVfg=w600-h0");
-//        images.add("https://asset.kompas.com/crops/wT4FMTcjLi6fY9jnR4z_VcEVYkA=/0x0:915x610/750x500/data/photo/2019/11/03/5dbe42c2a8fc8.jpg");
-//
-//
+        setListenerComponent();
 
         timer = new Timer();
-        timer.scheduleAtFixedRate(new SliderTimer(), 3000, 5000);
+//        timer.scheduleAtFixedRate(new SliderTimer(), 3000, 5000);
         return v;
     }
 
-    private void getImagesString(MutableLiveData<List<FotoKampus>> list) {
-        String imageUri = "http://192.168.100.140:8080/uploads/img_kampus/";
-        myString = new ArrayList<>();
-        List<FotoKampus> temp;
-        Log.d(TAG, "Cek list " + list.toString());
+    private void setListenerComponent() {
+        mTextLayoutTotalProdi.setEndIconOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View view) {
+                // Checking List Prodi Kampus
+                mCallbacks.onProdiSelected(mKampus.getId());
+            }
+        });
 
-        list.observe(getViewLifecycleOwner(), new Observer<List<FotoKampus>>() {
+        mTextLayoutAlamat.setEndIconOnClickListener(new View.OnClickListener() {
             @Override
-            public void onChanged(List<FotoKampus> fotoKampuses) {
+            public void onClick(View v) {
+                // Go To Maps
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("geo:0,0?q=" + mKampus.getNama_kampus()));
+                startActivity(intent);
+            }
+        });
 
-                for (FotoKampus image : fotoKampuses) {
-                    myString.add(imageUri + image.getFoto());
-                    Log.d(TAG, "Cek Val " + imageUri + image.getFoto());
-                }
+        mTextLayoutTelepon.setEndIconOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Go To Telephone
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + mKampus.getTelepon()));
+                startActivity(intent);
+            }
+        });
 
-                if (myString.isEmpty()) {
-                    myString.add("https://ie.binus.ac.id/files/2015/04/DSC06004UPDATE.jpg");
-                    myString.add("https://lh3.googleusercontent.com/p/AF1QipMyvbMxpApPuPJ88Y-cH-N_N2z1a83f3-OfbVfg=w600-h0");
-                    myString.add("https://asset.kompas.com/crops/wT4FMTcjLi6fY9jnR4z_VcEVYkA=/0x0:915x610/750x500/data/photo/2019/11/03/5dbe42c2a8fc8.jpg");
-                    myString.add("https://www.teahub.io/photos/full/303-3034192_default-banner-banner-jpg.jpg");
-                }
+        mTextLayoutWebsite.setEndIconOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Go To Website
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(mKampus.getWebsite()));
+                startActivity(intent);
+            }
+        });
 
-                imagePagerAdapter.setImages(myString);
+        mTextLayoutEmail.setEndIconOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Go To Email
+                Intent email = new Intent(Intent.ACTION_SEND);
+                email.putExtra(Intent.EXTRA_EMAIL, new String[]{mKampus.getEmail()});
+                email.putExtra(Intent.EXTRA_SUBJECT, "Saya tertarik dengan kampus ini");
+                email.putExtra(Intent.EXTRA_TEXT, "");
+
+                // This needed to prompts email client only
+                email.setType("message/rfc822");
+                startActivity(Intent.createChooser(email, "Choose an Email client :"));
             }
         });
     }
 
-    class SliderTimer extends TimerTask {
-
-
-        @Override
-        public void run() {
-            if (getActivity() == null) {
-                return;
+    private void getImagesString(MutableLiveData<List<FotoKampus>> list) {
+        list.observe(getViewLifecycleOwner(), new Observer<List<FotoKampus>>() {
+            @Override
+            public void onChanged(List<FotoKampus> fotoKampuses) {
+                // Set Image Adapter
+                imagePagerAdapter.setImages(CariKampusMethods.getUriStringImages(fotoKampuses));
             }
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if (viewPager.getCurrentItem() < imagePagerAdapter.getCount() - 1) {
-                        viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
-                    } else {
-                        viewPager.setCurrentItem(0);
-                    }
-                }
-            });
-        };
+        });
     }
+
+//    class SliderTimer extends TimerTask {
+//
+//        @Override
+//        public void run() {
+//            if (getActivity() == null) {
+//                return;
+//            }
+//            getActivity().runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    if (viewPager.getCurrentItem() < imagePagerAdapter.getCount() - 1) {
+//                        viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
+//                    } else {
+//                        viewPager.setCurrentItem(0);
+//                    }
+//                }
+//            });
+//        };
+//    }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        timer.cancel();
     }
 }

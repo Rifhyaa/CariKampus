@@ -30,6 +30,7 @@ import java.util.Collections;
 import java.util.List;
 
 import id.carikampus.R;
+import id.carikampus.helper.CariKampusConstants;
 import id.carikampus.helper.CariKampusMethods;
 import id.carikampus.helper.Preferences;
 import id.carikampus.model.Kampus;
@@ -53,7 +54,6 @@ public class KampusFavoritFragment extends Fragment {
     private View mViewLayoutEmptyFavorite;
 
     private List<Kampus> mKampuses;
-    private EditText mCariKampusTextInput;
 
     public interface Callbacks {
         public void onKampusSelected(int idKampus);
@@ -136,32 +136,13 @@ public class KampusFavoritFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_list_kampus, container, false);
         mViewLayoutEmpty = view.findViewById(R.id.empty_data);
         mViewLayoutEmptyFavorite = view.findViewById(R.id.empty_favorite);
-        mCariKampusTextInput = view.findViewById(R.id.search_kampus);
+
         mKampusRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mKampusRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mKampusRecyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(getContext(), R.anim.layout_animation));
         mKampusRecyclerView.setAdapter(mAdapter);
 
-        mCariKampusTextInput.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                filterQuery(s.toString());
-            }
-        });
-
-
         Log.i(TAG, TAG + ".onCreateView() Success");
-
         return view;
     }
 
@@ -170,39 +151,17 @@ public class KampusFavoritFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Log.i(TAG, "onViewCreated() Called!");
 
-        if (getArguments().getSerializable(ARG_USER_ID).equals("0")) {
-            mKampusListViewModel.getListKampus().observe(
-                    getViewLifecycleOwner(),
-                    new Observer<List<Kampus>>() {
-                        @Override
-                        public void onChanged(List<Kampus> kampus) {
-                            // Update the cached copy of
-                            updateUI(kampus);
-                            Log.i(TAG, TAG + ".Got Kampus: " + kampus.size());
-                        }
+
+        mKampusFavoritViewModel.getListKampusFavorit(mUserId).observe(
+                getViewLifecycleOwner(),
+                new Observer<List<KampusFavorit>>() {
+                    @Override
+                    public void onChanged(List<KampusFavorit> kampusFavorits) {
+                        Log.i(TAG, TAG + ".Got Kampus Favorit: " + kampusFavorits.size());
+                        updateUI(CariKampusMethods.getListKampusByFavorite(kampusFavorits, mUserId));
+                        setFavoritAdapter(kampusFavorits);
                     }
-            );
-            mKampusFavoritViewModel.getListKampusFavorit(Preferences.getIdUser(getActivity().getBaseContext())).observe(
-                    getViewLifecycleOwner(),
-                    new Observer<List<KampusFavorit>>() {
-                        @Override
-                        public void onChanged(List<KampusFavorit> kampusFavorits) {
-                            setFavoritAdapter(kampusFavorits);
-                        }
-                    });
-        }
-        else {
-            mKampusFavoritViewModel.getListKampusFavorit(mUserId).observe(
-                    getViewLifecycleOwner(),
-                    new Observer<List<KampusFavorit>>() {
-                        @Override
-                        public void onChanged(List<KampusFavorit> kampusFavorits) {
-                            Log.i(TAG, TAG + ".Got Kampus Favorit: " + kampusFavorits.size());
-                            updateUI(CariKampusMethods.getListKampusByFavorite(kampusFavorits, mUserId));
-                            setFavoritAdapter(kampusFavorits);
-                        }
-                    });
-        }
+                });
     }
 
     /**
@@ -274,8 +233,6 @@ public class KampusFavoritFragment extends Fragment {
         private TextView mNamaKampusTextView, mTotalProdiTextView, mAkreditasiTextView;
         private ToggleButton mToggleButton;
 
-        String imageUri = "http://192.168.100.140:8080/uploads/logo_kampus/";
-
         public KampusHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_kampus, parent, false));
             mLogoImageView = (ImageView) itemView.findViewById(R.id.foto_logo_kampus);
@@ -298,12 +255,10 @@ public class KampusFavoritFragment extends Fragment {
         public void bind(Kampus kampus) {
             mKampus = kampus;
 
-            String uri = imageUri + kampus.getFoto_logo();
+            String uri = CariKampusConstants.URL_LOGO_KAMPUS + kampus.getFoto_logo();
 
             Glide.with(mLogoImageView.getContext())
                     .load(uri)
-//                    .centerCrop()
-                    //.transform(new RoundedCorners(5))
                     .placeholder(R.drawable.undraw_void)
                     .error(R.drawable.undraw_search)
                     .into(mLogoImageView);

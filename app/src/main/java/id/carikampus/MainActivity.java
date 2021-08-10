@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -14,13 +16,16 @@ import android.view.View;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import id.carikampus.fragment.DashboardFragment;
+import id.carikampus.fragment.KampusFavoritFragment;
 import id.carikampus.fragment.KampusFragment;
 import id.carikampus.fragment.KampusListFragment;
 import id.carikampus.fragment.ProdiFragment;
 import id.carikampus.fragment.ProdiListFragment;
+import id.carikampus.fragment.SettingsFragment;
 import id.carikampus.helper.Preferences;
+import id.carikampus.model.KampusFavorit;
 
-public class MainActivity extends AppCompatActivity implements KampusListFragment.Callbacks, BottomNavigationView.OnNavigationItemSelectedListener, KampusFragment.Callbacks {
+public class MainActivity extends AppCompatActivity implements KampusListFragment.Callbacks, BottomNavigationView.OnNavigationItemSelectedListener, KampusFragment.Callbacks, KampusFavoritFragment.Callbacks {
 
     private static final String TAG = "MainActivity";
 
@@ -28,7 +33,13 @@ public class MainActivity extends AppCompatActivity implements KampusListFragmen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.getSupportActionBar().hide();
+
+        this.getSupportActionBar().setBackgroundDrawable(new ColorDrawable((Color.parseColor("#FB770D"))));
+        this.getSupportActionBar().setIcon(R.drawable.icon_logo);
+        this.getSupportActionBar().setDisplayUseLogoEnabled(true);
+        this.getSupportActionBar().setDisplayShowHomeEnabled(true);
+        this.getSupportActionBar().setDisplayShowTitleEnabled(false);
+        this.getSupportActionBar().setDisplayShowCustomEnabled(true);
 
         BottomNavigationView mBottomNav = findViewById(R.id.bottom_navigation_view);
         mBottomNav.setOnNavigationItemSelectedListener(this);
@@ -53,15 +64,15 @@ public class MainActivity extends AppCompatActivity implements KampusListFragmen
                 break;
             case R.id.school_menu:
                 Log.d(TAG,  "School Item");
-                fragment = KampusListFragment.newInstance();
+                fragment = KampusListFragment.newInstance(Preferences.getIdUser(getApplicationContext()));
                 break;
             case R.id.favorite_menu:
                 Log.d(TAG,  "Favorite Item");
-                fragment = KampusListFragment.newInstance(Preferences.getIdUser(getApplicationContext()));
+                fragment = KampusFavoritFragment.newInstance(Preferences.getIdUser(getApplicationContext()));
                 break;
             case R.id.person_menu:
                 Log.d(TAG,  "Person Item");
-                fragment = new DashboardFragment();
+                fragment = new SettingsFragment();
                 break;
             default:
         }

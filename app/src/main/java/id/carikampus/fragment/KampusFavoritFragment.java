@@ -133,7 +133,7 @@ public class KampusFavoritFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_list_kampus, container, false);
+        View view = inflater.inflate(R.layout.fragment_favorite_kampus, container, false);
         mViewLayoutEmpty = view.findViewById(R.id.empty_data);
         mViewLayoutEmptyFavorite = view.findViewById(R.id.empty_favorite);
 
@@ -169,8 +169,8 @@ public class KampusFavoritFragment extends Fragment {
      */
     public class KampusAdapter extends RecyclerView.Adapter<KampusHolder> {
 
-        private List<Kampus> mKampusList;
-        private List<KampusFavorit> mKampusFavoritList;
+        private List<Kampus> mKampusList = new ArrayList<>();;
+        private List<KampusFavorit> mKampusFavoritList = new ArrayList<>();;
 
         private int lastPosition = -1;
 

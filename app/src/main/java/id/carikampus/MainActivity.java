@@ -35,10 +35,11 @@ public class MainActivity extends AppCompatActivity implements KampusListFragmen
         setContentView(R.layout.activity_main);
 
         this.getSupportActionBar().setBackgroundDrawable(new ColorDrawable((Color.parseColor("#FB770D"))));
-        this.getSupportActionBar().setIcon(R.drawable.icon_logo);
+//        this.getSupportActionBar().setIcon(R.drawable.icon_logo);
         this.getSupportActionBar().setDisplayUseLogoEnabled(true);
         this.getSupportActionBar().setDisplayShowHomeEnabled(true);
-        this.getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle("Cari Kampus");
+        this.getSupportActionBar().setDisplayShowTitleEnabled(true);
         this.getSupportActionBar().setDisplayShowCustomEnabled(true);
 
         BottomNavigationView mBottomNav = findViewById(R.id.bottom_navigation_view);

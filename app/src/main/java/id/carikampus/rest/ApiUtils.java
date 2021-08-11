@@ -4,6 +4,7 @@ import id.carikampus.model.KampusFavorit;
 import id.carikampus.service.FotoKampusService;
 import id.carikampus.service.KampusFavoritService;
 import id.carikampus.service.KampusService;
+import id.carikampus.service.KomentarService;
 import id.carikampus.service.ProdiFavoritService;
 import id.carikampus.service.ProdiService;
 import id.carikampus.service.UserLoginService;
@@ -43,5 +44,9 @@ public class ApiUtils {
 
     public static ProdiFavoritService getProdiFavoritService() {
         return RetrofitClient.getClient(API_URL).create(ProdiFavoritService.class);
+    }
+
+    public static KomentarService getKomentarService() {
+        return RetrofitClient.getClient(API_URL).create(KomentarService.class);
     }
 }

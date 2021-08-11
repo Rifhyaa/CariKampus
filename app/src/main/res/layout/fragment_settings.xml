@@ -78,6 +78,7 @@
                 </RelativeLayout>
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_logout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:icon="@drawable/ic_baseline_logout_24"

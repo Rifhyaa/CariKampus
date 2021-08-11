@@ -83,6 +83,7 @@ public class LoginActivity extends AppCompatActivity {
 //                        pDialog.show();
 //                        Toast.makeText(getApplicationContext(), mUser.getUsername() + mUser.getPassword(), Toast.LENGTH_LONG).show();
                         Preferences.setIdUser(getApplicationContext(), userLogin.getId());
+                        Preferences.setNameUser(getApplicationContext(), userLogin.getNama());
                         Preferences.setUsernameUser(getApplicationContext(), userLogin.getUsername());
                         Preferences.setPasswordUser(getApplicationContext(), userLogin.getPassword());
                         Preferences.setLoggedInStatus(getApplicationContext(), true);

@@ -7,6 +7,7 @@
     tools:context=".fragment.KampusFragment">
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -26,10 +27,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginHorizontal="10dp"
-                android:paddingVertical="5dp"
-                android:background="@drawable/border_bottom_1_grey">
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/border_bottom_1_grey"
+                android:orientation="horizontal"
+                android:paddingVertical="5dp">
 
                 <TextView
                     android:id="@+id/total_favorite"
@@ -66,14 +68,14 @@
                     android:orientation="vertical">
 
                     <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:startIconDrawable="@drawable/ic_baseline_school_24"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_marginTop="10dp"
+                        android:hint="Nama Kampus"
                         app:boxStrokeWidth="0dp"
                         app:boxStrokeWidthFocused="0dp"
-                        android:hint="Nama Kampus">
+                        app:startIconDrawable="@drawable/ic_baseline_school_24">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/nama_kampus"
@@ -84,13 +86,13 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:startIconDrawable="@drawable/ic_baseline_card_membership_24"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:hint="Singkatan"
                         app:boxStrokeWidth="0dp"
                         app:boxStrokeWidthFocused="0dp"
-                        android:hint="Singkatan">
+                        app:startIconDrawable="@drawable/ic_baseline_card_membership_24">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/singkatan"
@@ -101,13 +103,13 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:startIconDrawable="@drawable/ic_baseline_grading_24"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:hint="Akreditasi"
                         app:boxStrokeWidth="0dp"
                         app:boxStrokeWidthFocused="0dp"
-                        android:hint="Akreditasi">
+                        app:startIconDrawable="@drawable/ic_baseline_grading_24">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/akreditasi"
@@ -135,17 +137,17 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_total_prodi"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:startIconDrawable="@drawable/ic_baseline_business_24"
-                        app:endIconMode="custom"
-                        app:endIconDrawable="@drawable/ic_baseline_keyboard_arrow_right_primary_24"
-                        app:endIconContentDescription="Lihat detail prodi"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_marginTop="10dp"
+                        android:hint="Total Prodi"
                         app:boxStrokeWidth="0dp"
                         app:boxStrokeWidthFocused="0dp"
-                        android:layout_marginTop="10dp"
-                        android:hint="Total Prodi">
+                        app:endIconContentDescription="Lihat detail prodi"
+                        app:endIconDrawable="@drawable/ic_baseline_keyboard_arrow_right_primary_24"
+                        app:endIconMode="custom"
+                        app:startIconDrawable="@drawable/ic_baseline_business_24">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/total_prodi"
@@ -156,13 +158,13 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:startIconDrawable="@drawable/ic_baseline_group_24"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:hint="Total Dosen"
                         app:boxStrokeWidth="0dp"
                         app:boxStrokeWidthFocused="0dp"
-                        android:hint="Total Dosen">
+                        app:startIconDrawable="@drawable/ic_baseline_group_24">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/total_dosen"
@@ -173,13 +175,13 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:startIconDrawable="@drawable/ic_baseline_attach_money_24"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:hint="Biaya Semester Minimal"
                         app:boxStrokeWidth="0dp"
                         app:boxStrokeWidthFocused="0dp"
-                        android:hint="Biaya Semester Minimal">
+                        app:startIconDrawable="@drawable/ic_baseline_attach_money_24">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/biaya_semester_minimal"
@@ -190,13 +192,13 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:startIconDrawable="@drawable/ic_baseline_attach_money_24"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:hint="Biaya Semester Maksimal"
                         app:boxStrokeWidth="0dp"
                         app:boxStrokeWidthFocused="0dp"
-                        android:hint="Biaya Semester Maksimal">
+                        app:startIconDrawable="@drawable/ic_baseline_attach_money_24">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/biaya_semester_maksimal"
@@ -224,17 +226,17 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_alamat"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:startIconDrawable="@drawable/ic_baseline_location_on_24"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        app:endIconMode="custom"
-                        app:endIconDrawable="@drawable/ic_baseline_keyboard_arrow_right_primary_24"
-                        app:endIconContentDescription="Lihat lokasi"
+                        android:layout_marginTop="10dp"
+                        android:hint="Alamat"
                         app:boxStrokeWidth="0dp"
                         app:boxStrokeWidthFocused="0dp"
-                        android:layout_marginTop="10dp"
-                        android:hint="Alamat">
+                        app:endIconContentDescription="Lihat lokasi"
+                        app:endIconDrawable="@drawable/ic_baseline_keyboard_arrow_right_primary_24"
+                        app:endIconMode="custom"
+                        app:startIconDrawable="@drawable/ic_baseline_location_on_24">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/alamat"
@@ -246,15 +248,15 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_telepon"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:startIconDrawable="@drawable/ic_baseline_local_phone_24"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        app:endIconMode="custom"
-                        app:endIconDrawable="@drawable/ic_baseline_keyboard_arrow_right_primary_24"
+                        android:hint="Telepon"
                         app:boxStrokeWidth="0dp"
                         app:boxStrokeWidthFocused="0dp"
-                        android:hint="Telepon">
+                        app:endIconDrawable="@drawable/ic_baseline_keyboard_arrow_right_primary_24"
+                        app:endIconMode="custom"
+                        app:startIconDrawable="@drawable/ic_baseline_local_phone_24">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/telepon"
@@ -266,15 +268,15 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_website"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:startIconDrawable="@drawable/ic_baseline_web_24"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        app:endIconMode="custom"
-                        app:endIconDrawable="@drawable/ic_baseline_keyboard_arrow_right_primary_24"
+                        android:hint="Website"
                         app:boxStrokeWidth="0dp"
                         app:boxStrokeWidthFocused="0dp"
-                        android:hint="Website">
+                        app:endIconDrawable="@drawable/ic_baseline_keyboard_arrow_right_primary_24"
+                        app:endIconMode="custom"
+                        app:startIconDrawable="@drawable/ic_baseline_web_24">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/website"
@@ -286,15 +288,15 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_email"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:startIconDrawable="@drawable/ic_baseline_email_24"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        app:endIconMode="custom"
-                        app:endIconDrawable="@drawable/ic_baseline_keyboard_arrow_right_primary_24"
+                        android:hint="Email"
                         app:boxStrokeWidth="0dp"
                         app:boxStrokeWidthFocused="0dp"
-                        android:hint="Email">
+                        app:endIconDrawable="@drawable/ic_baseline_keyboard_arrow_right_primary_24"
+                        app:endIconMode="custom"
+                        app:startIconDrawable="@drawable/ic_baseline_email_24">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/email"
@@ -306,75 +308,44 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-<!--            <com.google.android.material.card.MaterialCardView-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_margin="10dp"-->
-<!--                app:cardCornerRadius="5dp"-->
-<!--                app:cardElevation="10dp">-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="10dp"
+                android:paddingVertical="10dp"
+                android:visibility="visible">
 
-<!--                <RelativeLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:elevation="4dp"-->
-<!--                    android:padding="16dp"-->
-<!--                    android:background="@drawable/border_left_card_5dp_gray">-->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="10dp">
 
-<!--                    <EditText-->
-<!--                        android:id="@+id/komentar"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="14dp"-->
-<!--                        android:layout_marginEnd="10dp"-->
-<!--                        android:layout_alignParentTop="true"-->
-<!--                        android:background="@drawable/search_bg"-->
-<!--                        android:drawableStart="@drawable/ic_baseline_chat_24"-->
-<!--                        android:drawableEnd="@drawable/ic_baseline_send_24"-->
-<!--                        android:drawablePadding="10dp"-->
-<!--                        android:ems="10"-->
-<!--                        android:hint="Ketik Komentar Anda..."-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:background="@drawable/border_bottom_1_grey">
 
-<!--                        android:inputType="textPersonName"-->
-<!--                        android:padding="8dp" />-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="Komentar"
+                            android:textStyle="bold"
+                            android:textSize="16sp"/>
+                    </LinearLayout>
 
-<!--                    <ImageView-->
-<!--                        android:id="@+id/foto_logo_kampus"-->
-<!--                        android:layout_width="64dp"-->
-<!--                        android:layout_height="64dp"-->
-<!--                        android:layout_marginTop="15dp"-->
-<!--                        android:layout_below="@+id/komentar"-->
-<!--                        android:layout_marginEnd="15dp"-->
-<!--                        android:adjustViewBounds="true"-->
-<!--                        android:scaleType="centerInside"-->
-<!--                        android:src="@drawable/undraw_void" />-->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_view_komentar"
+                        android:layout_marginTop="40dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layoutAnimation="@anim/layout_animation" />
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/username"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginTop="15dp"-->
-<!--                        android:layout_below="@+id/komentar"-->
-<!--                        android:layout_toEndOf="@+id/foto_logo_kampus"-->
-<!--                        android:layout_marginBottom="5dp"-->
-<!--                        android:text="Username"-->
-<!--                        android:textSize="14sp"-->
-<!--                        android:textColor="@color/black"/>-->
+                </com.google.android.material.card.MaterialCardView>
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/comment"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_below="@+id/username"-->
-<!--                        android:layout_toEndOf="@+id/foto_logo_kampus"-->
-<!--                        android:text="Komentar"-->
-<!--                        android:drawableEnd="@drawable/ic_baseline_edit_24"-->
-<!--                        android:textColor="#8b8b8b"-->
-<!--                        android:layout_marginBottom="5dp"/>-->
-
-<!--                </RelativeLayout>-->
-
-
-<!--            </com.google.android.material.card.MaterialCardView>-->
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
 

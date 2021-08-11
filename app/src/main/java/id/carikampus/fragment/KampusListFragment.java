@@ -37,6 +37,7 @@ import java.util.Collections;
 import java.util.List;
 
 import id.carikampus.R;
+import id.carikampus.helper.CariKampusConstants;
 import id.carikampus.helper.CariKampusMethods;
 import id.carikampus.helper.Preferences;
 import id.carikampus.model.Kampus;
@@ -149,26 +150,7 @@ public class KampusListFragment extends Fragment {
         mKampusRecyclerView.setAdapter(mAdapter);
         setHasOptionsMenu(true);
 
-//        mCariKampusTextInput.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                filterQuery(s.toString());
-//            }
-//        });
-
-
         Log.i(TAG, TAG + ".onCreateView() Success");
-
         return view;
     }
 
@@ -221,21 +203,6 @@ public class KampusListFragment extends Fragment {
                         setFavoritAdapter(kampusFavorits);
                     }
                 });
-//        if (getArguments().getSerializable(ARG_USER_ID).equals("0")) {
-
-//        }
-//        else {
-//            mKampusFavoritViewModel.getListKampusFavorit(mUserId).observe(
-//                    getViewLifecycleOwner(),
-//                    new Observer<List<KampusFavorit>>() {
-//                        @Override
-//                        public void onChanged(List<KampusFavorit> kampusFavorits) {
-//                            Log.i(TAG, TAG + ".Got Kampus Favorit: " + kampusFavorits.size());
-//                            updateUI(CariKampusMethods.getListKampusByFavorite(kampusFavorits, mUserId));
-//                            setFavoritAdapter(kampusFavorits);
-//                        }
-//                    });
-//        }
     }
 
     /**
@@ -307,8 +274,6 @@ public class KampusListFragment extends Fragment {
         private TextView mNamaKampusTextView, mTotalProdiTextView, mAkreditasiTextView;
         private ToggleButton mToggleButton;
 
-        String imageUri = "http://192.168.100.140:8080/uploads/logo_kampus/";
-
         public KampusHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_kampus, parent, false));
             mLogoImageView = (ImageView) itemView.findViewById(R.id.foto_logo_kampus);
@@ -331,7 +296,7 @@ public class KampusListFragment extends Fragment {
         public void bind(Kampus kampus) {
             mKampus = kampus;
 
-            String uri = imageUri + kampus.getFoto_logo();
+            String uri = CariKampusConstants.URL_LOGO_KAMPUS + kampus.getFoto_logo();
 
             Glide.with(mLogoImageView.getContext())
                     .load(uri)

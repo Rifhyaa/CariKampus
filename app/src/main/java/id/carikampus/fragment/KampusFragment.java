@@ -11,17 +11,23 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -34,6 +40,7 @@ import java.util.TimerTask;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import id.carikampus.R;
+import id.carikampus.helper.CariKampusConstants;
 import id.carikampus.helper.CariKampusMethods;
 import id.carikampus.helper.Preferences;
 import id.carikampus.model.FotoKampus;
@@ -41,10 +48,12 @@ import id.carikampus.model.Kampus;
 import id.carikampus.helper.CirclePageIndicator;
 import id.carikampus.helper.ImagePagerAdapter;
 import id.carikampus.model.KampusFavorit;
+import id.carikampus.model.Komentar;
 import id.carikampus.repository.FotoKampusRepository;
 import id.carikampus.viewmodel.FotoKampusViewModel;
 import id.carikampus.viewmodel.KampusDetailViewModel;
 import id.carikampus.viewmodel.KampusFavoritViewModel;
+import id.carikampus.viewmodel.KomentarViewModel;
 
 public class KampusFragment extends Fragment {
 
@@ -56,8 +65,14 @@ public class KampusFragment extends Fragment {
 
     private Kampus mKampus;
     private List<KampusFavorit> mKampusFavorits;
+
+    private RecyclerView mKomentarRecyclerView;
+    private KomentarAdapter mAdapter;
+
+    // View Model
     private KampusDetailViewModel mKampusDetailViewModel;
     private FotoKampusViewModel mFotoKampusViewModel;
+    private KomentarViewModel mKomentarViewModel;
 
     // Fragment Component
     private TextInputEditText mNamaKampusText;
@@ -129,6 +144,15 @@ public class KampusFragment extends Fragment {
         return mFotoKampusViewModel;
     }
 
+    public KomentarViewModel getKomentarViewModel() {
+        if (mKomentarViewModel == null) {
+            mKomentarViewModel = new ViewModelProvider(this)
+                    .get(KomentarViewModel.class);
+        }
+
+        return mKomentarViewModel;
+    }
+
     public static KampusFragment newInstance(int kampusId) {
         KampusFragment fragment = new KampusFragment();
         Bundle args = new Bundle();
@@ -169,6 +193,11 @@ public class KampusFragment extends Fragment {
                 updateFavorit(myKampusFavorit);
             }
         });
+    }
+
+    private void updateKomentarUI(List<Komentar> komentars) {
+        this.mAdapter = new KomentarAdapter(komentars);
+        this.mKomentarRecyclerView.setAdapter(mAdapter);
     }
 
     private void updateFavorit(KampusFavorit kampusFavorit) {
@@ -219,6 +248,7 @@ public class KampusFragment extends Fragment {
         mKampus = new Kampus();
         mKampusDetailViewModel = getKampusDetailViewModel();
         mFotoKampusViewModel = getFotoKampusViewModel();
+        mKomentarViewModel = getKomentarViewModel();
     }
 
     @Override
@@ -233,6 +263,17 @@ public class KampusFragment extends Fragment {
                     public void onChanged(List<KampusFavorit> kampusFavorits) {
                         mKampusFavorits = kampusFavorits;
                         Log.d(TAG, TAG + "Got Total Favorits: " + kampusFavorits.size());
+                    }
+                }
+        );
+
+        mKomentarViewModel.getListKomentar(mKampusId).observe(
+                getViewLifecycleOwner(),
+                new Observer<List<Komentar>>() {
+                    @Override
+                    public void onChanged(List<Komentar> komentars) {
+                        Log.d(TAG, TAG + " Got Komentar: " + komentars.size());
+                        updateKomentarUI(komentars);
                     }
                 }
         );
@@ -252,6 +293,12 @@ public class KampusFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_kampus, container, false);
+
+        mKomentarRecyclerView = (RecyclerView) v.findViewById(R.id.recycler_view_komentar);
+        mKomentarRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mAdapter = new KomentarAdapter();
+        mKomentarRecyclerView.setAdapter(mAdapter);
+
         mNamaKampusText = (TextInputEditText) v.findViewById(R.id.nama_kampus);
         mSingkatanText = (TextInputEditText) v.findViewById(R.id.singkatan);
         mAkreditasiText = (TextInputEditText) v.findViewById(R.id.akreditasi);
@@ -350,28 +397,111 @@ public class KampusFragment extends Fragment {
         });
     }
 
-//    class SliderTimer extends TimerTask {
-//
-//        @Override
-//        public void run() {
-//            if (getActivity() == null) {
-//                return;
-//            }
-//            getActivity().runOnUiThread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    if (viewPager.getCurrentItem() < imagePagerAdapter.getCount() - 1) {
-//                        viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
-//                    } else {
-//                        viewPager.setCurrentItem(0);
-//                    }
-//                }
-//            });
-//        };
-//    }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
+    }
+
+    /**
+     * Komentar Adapter
+     */
+    public class KomentarAdapter extends RecyclerView.Adapter<KomentarHolder> {
+
+        private List<Komentar> mKomentars;
+
+        private int lastPosition = -1;
+
+        public KomentarAdapter() {
+            mKomentars = new ArrayList<>();;
+        }
+
+        public KomentarAdapter(List<Komentar> komentar) {
+            mKomentars = komentar;
+            notifyDataSetChanged();
+        }
+
+        @Override
+        public KomentarHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+
+            return new KomentarHolder(layoutInflater, parent);
+        }
+
+        @Override
+        public void onBindViewHolder(KomentarHolder holder, int position) {
+            Komentar komentar = mKomentars.get(position);
+            holder.bind(komentar);
+
+            setAnimation(holder.itemView, position);
+        }
+
+        @Override
+        public int getItemCount() {
+            return mKomentars.size();
+        }
+
+        private void setAnimation(View viewToAnimate, int position)
+        {
+            // If the bound view wasn't previously displayed on screen, it's animated
+            if (position > lastPosition)
+            {
+                Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.item_animation_fall_down);
+                viewToAnimate.startAnimation(animation);
+                lastPosition = position;
+            }
+        }
+    }
+
+    /**
+     * Komentar Holder
+     */
+    class KomentarHolder extends RecyclerView.ViewHolder {
+
+        private Komentar mKomentar;
+        private TextView mNamaUserTextView, mKomentarTextView;
+
+
+        public KomentarHolder(LayoutInflater inflater, ViewGroup parent) {
+            super(inflater.inflate(R.layout.list_item_komentar, parent, false));
+
+            mNamaUserTextView = (TextView) itemView.findViewById(R.id.text_nama_user);
+            mKomentarTextView = (TextView) itemView.findViewById(R.id.text_komentar);
+//            mLogoImageView = (ImageView) itemView.findViewById(R.id.foto_logo_kampus);
+//            mNamaKampusTextView = (TextView) itemView.findViewById(R.id.text_nama_kampus);
+//            mTotalProdiTextView = (TextView) itemView.findViewById(R.id.text_total_prodi);
+//            mAkreditasiTextView = (TextView) itemView.findViewById(R.id.text_akreditasi);
+//            mToggleButton = (ToggleButton) itemView.findViewById(R.id.button_favorite);
+//
+//            mNamaKampusTextView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Toast.makeText(getActivity(), mKampus.getId() + " Clicked!", Toast.LENGTH_SHORT).show();
+//                    mCallbacks.onKampusSelected(mKampus.getId());
+//                }
+//            });
+//
+//            mToggleButton.setEnabled(false);
+        }
+
+        public void bind(Komentar komentar) {
+
+            mNamaUserTextView.setText(komentar.getUserLogin().getNama());
+            mKomentarTextView.setText(komentar.getKomentar());
+//            mKampus = kampus;
+//
+//            String uri = CariKampusConstants.URL_LOGO_KAMPUS + kampus.getFoto_logo();
+//
+//            Glide.with(mLogoImageView.getContext())
+//                    .load(uri)
+//                    .placeholder(R.drawable.undraw_void)
+//                    .error(R.drawable.undraw_search)
+//                    .into(mLogoImageView);
+//
+//
+//            mNamaKampusTextView.setText(mKampus.getNama_kampus());
+//            mTotalProdiTextView.setText(mKampus.getTotal_prodi() + " Prodi");
+//            mAkreditasiTextView.setText("Akreditasi " + mKampus.getAkreditasi());
+//            mToggleButton.setChecked((mKampus.getLiked() == 1));
+        }
     }
 }

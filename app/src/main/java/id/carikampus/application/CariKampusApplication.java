@@ -7,6 +7,7 @@ import id.carikampus.model.KampusFavorit;
 import id.carikampus.repository.FotoKampusRepository;
 import id.carikampus.repository.KampusFavoritRepository;
 import id.carikampus.repository.KampusRepository;
+import id.carikampus.repository.KomentarRepository;
 import id.carikampus.repository.ProdiRepository;
 import id.carikampus.repository.UserLoginRepository;
 
@@ -23,5 +24,6 @@ public class CariKampusApplication extends Application {
         FotoKampusRepository.initialize(this);
         UserLoginRepository.initialize(this);
         KampusFavoritRepository.initialize(this);
+        KomentarRepository.initialize(this);
     }
 }

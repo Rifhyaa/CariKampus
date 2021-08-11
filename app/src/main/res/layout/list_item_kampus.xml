@@ -72,6 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/text_akreditasi"
             android:layout_toEndOf="@+id/foto_logo_kampus"
+            android:visibility="gone"
             android:text="10 Orang Menyukai"
             android:layout_marginBottom="5dp" />
 

@@ -27,4 +27,8 @@ public class KomentarViewModel extends ViewModel {
     public LiveData<List<Komentar>> getListKomentar(int id) {
         return mKomentarRepository.getListKomentarByIdKampus(id);
     }
+
+    public LiveData<Komentar> saveKomentar(Komentar komentar) {
+        return mKomentarRepository.saveKomentar(komentar);
+    }
 }

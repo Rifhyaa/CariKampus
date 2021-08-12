@@ -9,6 +9,7 @@ public class Preferences {
     static final String KEY_ID_USER = "id_user";
     static final String KEY_TEMP_ID_KAMPUS = "id_kampus";
     static final String KEY_NAME_USER = "name_user";
+    static final String KEY_EMAIL_USER = "email_user";
     static final String KEY_USERNAME_USER = "username_user";
     static final String KEY_PASSWORD_USER = "password_user";
     static final String KEY_LOGGED_IN_STATUS = "status_logged_in";
@@ -33,6 +34,12 @@ public class Preferences {
     public static void setNameUser(Context context, String name) {
         SharedPreferences.Editor editor = getSharedPreference(context).edit();
         editor.putString(KEY_NAME_USER, name);
+        editor.apply();
+    }
+
+    public static void setEmailUser(Context context, String email) {
+        SharedPreferences.Editor editor = getSharedPreference(context).edit();
+        editor.putString(KEY_EMAIL_USER, email);
         editor.apply();
     }
 
@@ -75,6 +82,10 @@ public class Preferences {
 
     public static String getNameUser(Context context){
         return getSharedPreference(context).getString(KEY_NAME_USER,"null");
+    }
+
+    public static String getEmailUser(Context context){
+        return getSharedPreference(context).getString(KEY_EMAIL_USER,null);
     }
 
     public static String getUsernameUser(Context context){

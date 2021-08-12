@@ -28,7 +28,16 @@ public class Komentar {
     private int edited = 0;
 
     @Expose
-    private Date created = new Date();
+    private Date created;
+
+    public Komentar(int id, Integer id_kampus, Integer id_user_login, String komentar) {
+        this.id = id;
+        this.id_kampus = id_kampus;
+        this.id_user_login = id_user_login;
+        this.komentar = komentar;
+        this.edited = 0;
+        this.created = null;
+    }
 
     public int getId() {
         return id;

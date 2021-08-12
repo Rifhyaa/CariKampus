@@ -50,7 +50,7 @@ public class KampusFavoritFragment extends Fragment {
     private KampusFavoritViewModel mKampusFavoritViewModel;
     private int mUserId = 0;
 
-    private View mViewLayoutEmpty;
+//    private View mViewLayoutEmpty;
     private View mViewLayoutEmptyFavorite;
 
     private List<Kampus> mKampuses;
@@ -100,11 +100,15 @@ public class KampusFavoritFragment extends Fragment {
     private void updateUI(List<Kampus> kampus) {
         mKampuses = kampus;
         mAdapter = new KampusAdapter(kampus);
-        filterQuery("");
+//        filterQuery("");
 //        mKampusRecyclerView.setAdapter(mAdapter);
 
         if (kampus.size() == 0) {
             mViewLayoutEmptyFavorite.setVisibility(View.VISIBLE);
+            mKampusRecyclerView.setVisibility(View.GONE);
+        } else {
+            mViewLayoutEmptyFavorite.setVisibility(View.GONE);
+            mKampusRecyclerView.setVisibility(View.VISIBLE);
         }
 
         Log.i(TAG, TAG + ".updateUI() Success " + kampus);
@@ -134,7 +138,7 @@ public class KampusFavoritFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorite_kampus, container, false);
-        mViewLayoutEmpty = view.findViewById(R.id.empty_data);
+//        mViewLayoutEmpty = view.findViewById(R.id.empty_data);
         mViewLayoutEmptyFavorite = view.findViewById(R.id.empty_favorite);
 
         mKampusRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
@@ -183,7 +187,7 @@ public class KampusFavoritFragment extends Fragment {
         }
 
         public void filterSearch(List<Kampus> kampusList) {
-            mViewLayoutEmpty.setVisibility((kampusList.size() == 0 ? View.VISIBLE : View.GONE));
+//            mViewLayoutEmpty.setVisibility((kampusList.size() == 0 ? View.VISIBLE : View.GONE));
             mKampusRecyclerView.setVisibility((kampusList.size() == 0 ? View.GONE : View.VISIBLE));
 
             this.mKampusList = kampusList;

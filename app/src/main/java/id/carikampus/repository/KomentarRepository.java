@@ -56,4 +56,24 @@ public class KomentarRepository {
 
         return lists;
     }
+
+    public LiveData<Komentar> saveKomentar(Komentar komentar) {
+        MutableLiveData<Komentar> myKomentar = new MutableLiveData<>();
+
+        Call<Komentar> call = mKomentarService.saveKomentar(komentar);
+        call.enqueue(new Callback<Komentar>() {
+            @Override
+            public void onResponse(Call<Komentar> call, Response<Komentar> response) {
+                myKomentar.setValue(response.body());
+                Log.i(TAG, TAG + ".saveKomentar() Success");
+            }
+
+            @Override
+            public void onFailure(Call<Komentar> call, Throwable t) {
+                Log.e(TAG, "onFailure: " + t.getMessage());
+            }
+        });
+
+        return myKomentar;
+    }
 }

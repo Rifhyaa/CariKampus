@@ -43,8 +43,9 @@
             android:id="@+id/text_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="Lets Get Strated!"
+            android:fontFamily="@font/poppins_regular"
+            android:layout_marginBottom="5dp"
+            android:text="@string/register_header"
             android:textAlignment="center"
             android:textColor="@color/theme_black"
             android:textSize="28sp"
@@ -54,8 +55,9 @@
             android:id="@+id/text_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:text="Create an account to access Cari Kampus!"
+            android:fontFamily="@font/poppins_regular"
+            android:layout_marginBottom="10dp"
+            android:text="@string/register_subheader"
             android:textAlignment="center"
             android:textColor="@color/theme_grey"
             android:textSize="16sp" />
@@ -73,9 +75,9 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/nama"
+                android:inputType="text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white" />
+                android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -83,31 +85,45 @@
             android:id="@+id/header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Jenis Kelamin:"
+            android:text="Jenis Kelamin :"
             android:textSize="16dp" />
 
         <RadioGroup
             android:id="@+id/radioGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/radio_button_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="Laki - Laki" />
+
+<!--            <View-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="1dp"-->
+<!--                android:layout_weight="0.2" />-->
 
             <RadioButton
                 android:id="@+id/radio_button_2"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="Perempuan" />
 
         </RadioGroup>
+
+<!--        <TextView-->
+<!--            android:id="@+id/error_kelamin"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Jenis Kelamin wajib diisi"-->
+<!--            android:visibility="gone"-->
+<!--            android:layout_marginBottom="10dp"-->
+<!--            android:textColor="@color/btn_danger"/>-->
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_email"
@@ -122,9 +138,9 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email"
+                android:inputType="text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white" />
+                android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -141,9 +157,9 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/username"
+                android:inputType="text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white" />
+                android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -160,30 +176,11 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password"
+                android:inputType="textPassword"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white" />
+                android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
-
-        <!--            <com.google.android.material.textfield.TextInputLayout-->
-        <!--                android:id="@+id/til__confirm_password"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-        <!--                app:startIconDrawable="@drawable/ic_outline_lock_24"-->
-        <!--                app:endIconMode="password_toggle"-->
-        <!--                app:errorEnabled="true"-->
-        <!--                android:hint="Konfirmasi Password"-->
-        <!--                android:layout_marginBottom="10dp">-->
-
-        <!--                <com.google.android.material.textfield.TextInputEditText-->
-        <!--                    android:id="@+id/confirm_password"-->
-        <!--                    android:background="@color/white"-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:layout_height="wrap_content" />-->
-
-        <!--            </com.google.android.material.textfield.TextInputLayout>-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -202,6 +199,5 @@
 
 
     </LinearLayout>
-
-    <!--    </androidx.core.widget.NestedScrollView>-->
+    
 </androidx.constraintlayout.widget.ConstraintLayout>

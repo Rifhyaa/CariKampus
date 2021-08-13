@@ -6,27 +6,47 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import id.carikampus.fragment.DashboardFragment;
+import id.carikampus.fragment.KampusFavoritFragment;
 import id.carikampus.fragment.KampusFragment;
 import id.carikampus.fragment.KampusListFragment;
 import id.carikampus.fragment.ProdiFragment;
+import id.carikampus.fragment.ProdiListFragment;
+import id.carikampus.fragment.SettingsFragment;
+import id.carikampus.helper.InternetDialog;
+import id.carikampus.helper.Preferences;
+import id.carikampus.model.KampusFavorit;
 
-public class MainActivity extends AppCompatActivity implements KampusListFragment.Callbacks, BottomNavigationView.OnNavigationItemSelectedListener, KampusFragment.Callbacks {
+public class MainActivity extends AppCompatActivity implements KampusListFragment.Callbacks, BottomNavigationView.OnNavigationItemSelectedListener, KampusFragment.Callbacks, KampusFavoritFragment.Callbacks {
 
     private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_list_kampus);
-        this.getSupportActionBar().hide();
+        setContentView(R.layout.activity_main);
+
+        if(new InternetDialog(this).getInternetStatus()){
+            Toast.makeText(this, "INTERNET VALIDATION PASSED", Toast.LENGTH_SHORT).show();
+        }
+
+        this.getSupportActionBar().setBackgroundDrawable(new ColorDrawable((Color.parseColor("#FB770D"))));
+//        this.getSupportActionBar().setIcon(R.drawable.icon_logo);
+        this.getSupportActionBar().setDisplayUseLogoEnabled(true);
+        this.getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Cari Kampus");
+        this.getSupportActionBar().setDisplayShowTitleEnabled(true);
+        this.getSupportActionBar().setDisplayShowCustomEnabled(true);
 
         BottomNavigationView mBottomNav = findViewById(R.id.bottom_navigation_view);
         mBottomNav.setOnNavigationItemSelectedListener(this);
@@ -34,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements KampusListFragmen
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragment_container);
         if (fragment == null) {
-            fragment = KampusListFragment.newInstance();
+            fragment = new DashboardFragment();
             fm.beginTransaction().add(R.id.fragment_container, fragment)
                     .commit();
         }
@@ -51,16 +71,15 @@ public class MainActivity extends AppCompatActivity implements KampusListFragmen
                 break;
             case R.id.school_menu:
                 Log.d(TAG,  "School Item");
-                findViewById(R.id.cari_kampus).setVisibility(View.VISIBLE);
-                fragment = KampusListFragment.newInstance();
+                fragment = KampusListFragment.newInstance(Preferences.getIdUser(getApplicationContext()));
                 break;
             case R.id.favorite_menu:
                 Log.d(TAG,  "Favorite Item");
-                fragment = new ProdiFragment();
+                fragment = KampusFavoritFragment.newInstance(Preferences.getIdUser(getApplicationContext()));
                 break;
             case R.id.person_menu:
                 Log.d(TAG,  "Person Item");
-                fragment = KampusFragment.newInstance(1);
+                fragment = new SettingsFragment();
                 break;
             default:
         }
@@ -69,7 +88,6 @@ public class MainActivity extends AppCompatActivity implements KampusListFragmen
 
     private boolean loadFragment(Fragment fragment) {
         if (fragment != null) {
-//                fragment = new ProdiFragment();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, fragment)
                     .commit();
@@ -82,7 +100,6 @@ public class MainActivity extends AppCompatActivity implements KampusListFragmen
     public void onKampusSelected(int idKampus) {
         Log.i(TAG, "MainActivity.onKampusSelected : " + idKampus);
         Fragment fragment = KampusFragment.newInstance(idKampus);
-        findViewById(R.id.cari_kampus).setVisibility(View.GONE);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)
@@ -93,8 +110,7 @@ public class MainActivity extends AppCompatActivity implements KampusListFragmen
     @Override
     public void onProdiSelected(int idKampus) {
         Log.i(TAG, "MainActivity.onProdiSelected : " + idKampus);
-        Fragment fragment = new ProdiFragment();
-        findViewById(R.id.cari_kampus).setVisibility(View.GONE);
+        Fragment fragment = ProdiListFragment.newInstance(idKampus);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)

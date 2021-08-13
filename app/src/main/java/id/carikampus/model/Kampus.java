@@ -55,6 +55,9 @@ public class Kampus {
     @Expose
     private String foto_logo;
 
+    @Expose
+    private Integer liked;
+
     public Integer getId() {
         return id;
     }
@@ -189,5 +192,37 @@ public class Kampus {
 
     public void setFoto_logo(String foto_logo) {
         this.foto_logo = foto_logo;
+    }
+
+    public Integer getLiked() {
+        return liked;
+    }
+
+    public void setLiked(Integer liked) {
+        this.liked = liked;
+    }
+
+    @Override
+    public String toString() {
+        return "Kampus{" +
+                "id=" + id +
+                ", nama_kampus='" + nama_kampus + '\'' +
+                ", singkatan='" + singkatan + '\'' +
+                ", akreditasi='" + akreditasi + '\'' +
+                ", ranking=" + ranking +
+                ", total_prodi=" + total_prodi +
+                ", total_dosen=" + total_dosen +
+                ", total_mahasiswa=" + total_mahasiswa +
+                ", biaya_administrasi=" + biaya_administrasi +
+                ", biaya_semester_minimal=" + biaya_semester_minimal +
+                ", biaya_semester_maksimal=" + biaya_semester_maksimal +
+                ", alamat='" + alamat + '\'' +
+                ", telepon='" + telepon + '\'' +
+                ", website='" + website + '\'' +
+                ", email='" + email + '\'' +
+                ", status=" + status +
+                ", foto_logo='" + foto_logo + '\'' +
+                ", liked=" + liked +
+                '}';
     }
 }

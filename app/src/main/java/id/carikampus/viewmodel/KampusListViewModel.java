@@ -23,5 +23,4 @@ public class KampusListViewModel extends ViewModel {
     public MutableLiveData<List<Kampus>> getListKampus() {
         return mKampusListMutableLiveData;
     }
-
 }

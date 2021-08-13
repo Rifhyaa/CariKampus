@@ -20,37 +20,20 @@ import id.carikampus.model.Kampus;
 
 public class DashboardFragment extends Fragment {
 
-    TextView mUsernameTextView, mPasswordTextView;
-    Button mButtonLogout;
+    TextView mNamaUserTextView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        Log.i(TAG, "onCreate() called");
-//        mKampusId = (int) getArguments().getSerializable(ARG_KAMPUS_ID);
-//        Log.i(TAG, "args bundle is : " + mKampusId);
-//        mKampus = new Kampus();
-//        mKampusDetailViewModel = getKampusDetailViewModel();
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        mUsernameTextView = v.findViewById(R.id.textView);
-        mPasswordTextView = v.findViewById(R.id.textView2);
-        mButtonLogout = v.findViewById(R.id.btn_logout);
 
-        mUsernameTextView.setText(Preferences.getUsernameUser(v.getContext()));
-        mPasswordTextView.setText(Preferences.getPasswordUser(v.getContext()));
-        mButtonLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Preferences.clearPreferences(getActivity().getBaseContext());
-                startActivity(new Intent(getActivity().getBaseContext(), IntroductionActivity.class));
-                getActivity().finish();
-            }
-        });
+        mNamaUserTextView = v.findViewById(R.id.text_nama_user);
+        mNamaUserTextView.setText("Halo " + Preferences.getNameUser(getContext()));
         return v;
     }
 }

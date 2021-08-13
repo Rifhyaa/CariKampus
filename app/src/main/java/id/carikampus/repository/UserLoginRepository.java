@@ -80,4 +80,26 @@ public class UserLoginRepository {
 
         return userLogin;
     }
+
+    public LiveData<UserLogin> updateUser(UserLogin myUser) {
+        MutableLiveData<UserLogin> userLogin = new MutableLiveData<>();
+
+        Call<UserLogin> call = mUserLoginService.updateUser(myUser);
+        call.enqueue(new Callback<UserLogin>() {
+            @Override
+            public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
+                if (response.isSuccessful()) {
+                    userLogin.setValue(response.body());
+                    CariKampusMethods.printLog(TAG, "getUserLoginById.onResponse() Called!");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserLogin> call, Throwable t) {
+                Log.e(TAG, "onFailure: " + t.getMessage());
+            }
+        });
+
+        return userLogin;
+    }
 }

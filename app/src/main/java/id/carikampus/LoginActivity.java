@@ -64,30 +64,40 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         mButton.setOnClickListener(v -> {
-            if (validateUsername()) {
-                mUser.setUsername(mUsername.getText().toString());
-                mUser.setPassword(mPassword.getText().toString());
-//                Toast.makeText(getApplicationContext(), mUser.getUsername() + mUser.getPassword(), Toast.LENGTH_LONG).show();
-//                Toast.makeText(getApplicationContext(), mUser.getUsername() + mUser.getPassword(), Toast.LENGTH_LONG).show();
+            if (validateField()) {
+                mUser.setUsername(mUsername.getText().toString().trim());
+                mUser.setPassword(mPassword.getText().toString().trim());
+
                 mUserLoginViewModel.loadUserLogin(mUser.getUsername(), mUser.getPassword()).observe(this, userLogin -> {
                     if (userLogin.getId() == -1) {
-//                        SweetAlertDialog pDialog = new SweetAlertDialog(getApplicationContext(), SweetAlertDialog.ERROR_TYPE);
-//                        pDialog.setTitleText("Username atau password salah");
-//                        pDialog.setCancelable(true);
-//                        pDialog.show();
-                        Toast.makeText(getApplicationContext(), "salah", Toast.LENGTH_LONG).show();
-                    } else {
-//                        SweetAlertDialog pDialog = new SweetAlertDialog(getApplicationContext(), SweetAlertDialog.SUCCESS_TYPE);
-//                        pDialog.setTitleText("Uyey");
-//                        pDialog.setCancelable(true);
-//                        pDialog.show();
-//                        Toast.makeText(getApplicationContext(), mUser.getUsername() + mUser.getPassword(), Toast.LENGTH_LONG).show();
+                        new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.ERROR_TYPE)
+                                .setTitleText("Login gagal")
+                                .setContentText("Username atau password salah")
+                                .show();
+
+                        mPassword.setText("");
+                    }
+                    else {
                         Preferences.setIdUser(getApplicationContext(), userLogin.getId());
+                        Preferences.setNameUser(getApplicationContext(), userLogin.getNama());
                         Preferences.setUsernameUser(getApplicationContext(), userLogin.getUsername());
                         Preferences.setPasswordUser(getApplicationContext(), userLogin.getPassword());
+                        Preferences.setEmailUser(getApplicationContext(), userLogin.getEmail());
                         Preferences.setLoggedInStatus(getApplicationContext(), true);
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        finish();
+
+                        new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.SUCCESS_TYPE)
+                                .setTitleText("Login berhasil!")
+                                .setContentText("Selamat datang " + userLogin.getNama())
+                                .setConfirmText("Ok!")
+                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sDialog) {
+                                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                        finish();
+                                    }
+                                })
+                                .show();
+
                     }
                 });
 
@@ -95,12 +105,37 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    private boolean validateField() {
+        boolean resultUsername = false;
+        boolean resultPassword = false;
+
+        resultUsername = validateUsername();
+        resultPassword = validatePassword();
+
+        if (!resultUsername && !resultPassword) {
+            return false;
+        }
+
+        return resultUsername == resultPassword;
+    }
+
     private boolean validateUsername() {
-        if (mUsername.getText().toString().isEmpty()) {
-            setErrorLayout(R.id.til_username, "Username harus diisi.");
+        if (mUsername.getText().toString().trim().isEmpty()) {
+            setErrorLayout(R.id.til_username, "Username tidak boleh kosong.");
             return false;
         } else {
             setErrorLayout(R.id.til_username, null);
+        }
+
+        return true;
+    }
+
+    private boolean validatePassword() {
+        if (mPassword.getText().toString().trim().isEmpty()) {
+            setErrorLayout(R.id.til_password, "Password tidak boleh kosong.");
+            return false;
+        } else {
+            setErrorLayout(R.id.til_password, null);
         }
 
         return true;

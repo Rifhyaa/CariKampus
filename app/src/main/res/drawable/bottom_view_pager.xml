@@ -9,7 +9,7 @@
 <!--        android:topRightRadius="80dp"/>-->
 
 
-    <stroke android:width="0.5dp" android:color="#C5C6D0" />
+    <stroke android:width="0.8dp" android:color="@color/carikampus_grey" />
 <!--    <stroke android:width="0.5dp" android:color="@color/theme_black" />-->
     <size
         android:width="30dp"

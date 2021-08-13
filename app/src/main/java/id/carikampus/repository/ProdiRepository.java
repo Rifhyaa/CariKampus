@@ -3,6 +3,7 @@ package id.carikampus.repository;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
@@ -58,7 +59,7 @@ public class ProdiRepository {
         return prodi;
     }
 
-    public MutableLiveData<List<Prodi>> getProdiByIdKampus(int id) {
+    public LiveData<List<Prodi>> getProdiByIdKampus(int id) {
         MutableLiveData<List<Prodi>> prodis = new MutableLiveData<>();
 
         Call<List<Prodi>> call = mProdiService.getProdiByIdKampus(id);

@@ -22,6 +22,19 @@ public class UserLogin {
     @Expose
     private String password;
 
+    public UserLogin() {
+
+    }
+
+    public UserLogin(int id, String nama, String email,String username, String password) {
+        this.id = id;
+        this.nama = nama;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+    }
+
+
     public int getId() {
         return id;
     }

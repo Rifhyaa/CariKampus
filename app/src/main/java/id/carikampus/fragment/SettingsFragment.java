@@ -34,6 +34,8 @@ import retrofit2.Response;
 
 public class SettingsFragment extends Fragment {
 
+    private static final String TAG = "SettingsFragment";
+
     private TextView midUser;
 
     private TextView mUname;
@@ -167,12 +169,12 @@ public class SettingsFragment extends Fragment {
                     new Observer<UserLogin>() {
                         @Override
                         public void onChanged(UserLogin userLogin) {
-                            Log.d("fRAGMENT SETTING", "SUKSES UPDATE");
                             Preferences.setIdUser(getContext(), userLogin.getId());
                             Preferences.setEmailUser(getContext(), userLogin.getEmail());
                             Preferences.setNameUser(getContext(), userLogin.getNama());
                             Preferences.setPasswordUser(getContext(), userLogin.getPassword());
 
+                            Log.d(TAG, ".updateUserLogin() Success");
                             updateUI();
                         }
                     }
@@ -183,15 +185,17 @@ public class SettingsFragment extends Fragment {
     }
 
     private void updateUI() {
-        midUser.setText("" + Preferences.getIdUser(getContext()));
-        mUname.setText("" + Preferences.getUsernameUser(getContext()));
+//        midUser.setText("" + Preferences.getIdUser(getContext()));
+//        mUname.setText("" + Preferences.getUsernameUser(getContext()));
 
         mNama.setText(Preferences.getNameUser(getContext()));
-        mEmail.setText("" + Preferences.getEmailUser(getContext()));
+        mEmail.setText(Preferences.getEmailUser(getContext()));
         mPassword.setText(Preferences.getPasswordUser(getContext()));
         mPassword2.setText(Preferences.getPasswordUser(getContext()));
 
         mUserTextView.setText(Preferences.getNameUser(getContext()));
         mEmailTextView.setText("Username : " + Preferences.getUsernameUser(getContext()));
+
+        Log.d(TAG, ".updateUI() Success");
     }
 }

@@ -46,7 +46,7 @@ public class ProdiRepository {
             public void onResponse(Call<Prodi> call, Response<Prodi> response) {
                 if (response.isSuccessful()) {
                     prodi.setValue(response.body());
-                    CariKampusMethods.printLog(TAG, "getProdiById.onResponse() Called!");
+                    Log.i(TAG, TAG + ".getProdiById() Success");
                 }
             }
 
@@ -68,7 +68,7 @@ public class ProdiRepository {
             public void onResponse(Call<List<Prodi>> call, Response<List<Prodi>> response) {
                 if (response.isSuccessful()) {
                     prodis.setValue(response.body());
-                    CariKampusMethods.printLog(TAG, "getProdiByIdKampus.onResponse() Called!");
+                    Log.i(TAG, TAG + ".getProdiByIdKampus() Success");
                 }
             }
 

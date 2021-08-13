@@ -111,11 +111,7 @@ public class KampusListFragment extends Fragment {
         filterQuery("");
 //        mKampusRecyclerView.setAdapter(mAdapter);
 
-//        if (kampus.size() == 0) {
-//            mViewLayoutEmptyFavorite.setVisibility(View.VISIBLE);
-//        }
-
-        Log.i(TAG, TAG + ".updateUI() Success " + kampus);
+        Log.d(TAG, TAG + ".updateUI() Success " + kampus);
     }
 
     private void setFavoritAdapter(List<KampusFavorit> kampusFavorits) {
@@ -135,7 +131,7 @@ public class KampusListFragment extends Fragment {
         mAdapter = new KampusAdapter(Collections.<Kampus>emptyList());
 
         mUserId = (int) getArguments().getSerializable(ARG_USER_ID);
-        Log.i(TAG, TAG + ".onCreate() Success");
+        Log.d(TAG, TAG + ".onCreate() Success");
     }
 
     @Override
@@ -150,7 +146,7 @@ public class KampusListFragment extends Fragment {
         mKampusRecyclerView.setAdapter(mAdapter);
         setHasOptionsMenu(true);
 
-        Log.i(TAG, TAG + ".onCreateView() Success");
+        Log.d(TAG, TAG + ".onCreateView() Success");
         return view;
     }
 
@@ -182,7 +178,6 @@ public class KampusListFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.i(TAG, "KampusListFragment.onViewCreated() Called!");
 
         mKampusListViewModel.getListKampus().observe(
                 getViewLifecycleOwner(),
@@ -203,6 +198,8 @@ public class KampusListFragment extends Fragment {
                         setFavoritAdapter(kampusFavorits);
                     }
                 });
+
+        Log.d(TAG, TAG + ".onViewCreated() Success!");
     }
 
     /**

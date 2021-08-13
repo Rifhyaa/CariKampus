@@ -40,24 +40,11 @@ public class ProdiListFragment extends Fragment {
 
     private int mKampusId;
 
-//    @Override
-//    public void onAttach(@NonNull Context context) {
-//        super.onAttach(context);
-//        Log.i(TAG, "onAttach called");
-//    }
-//
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        Log.i(TAG, "onDetach called");
-//    }
-
-//    private ProdiListFragment.Callbacks mCallbacks = null;
-
     private void updateUI(List<Prodi> prodis) {
         mAdapter = new ProdiAdapter(prodis);
         mProdiRecyclerView.setAdapter(mAdapter);
-        Log.i(TAG, TAG + ".updateUI() Success");
+
+        Log.d(TAG, TAG + ".updateUI() Success");
     }
 
     @Override
@@ -66,7 +53,8 @@ public class ProdiListFragment extends Fragment {
         mKampusId = (int) getArguments().getSerializable(ARG_KAMPUS_ID);
         mProdiListViewModel = new ViewModelProvider(this).get(ProdiListViewModel.class);
         mAdapter = new ProdiAdapter(Collections.<Prodi>emptyList());
-        Log.i(TAG, TAG + ".onCreate() Success");
+
+        Log.d(TAG, TAG + ".onCreate() Success");
     }
 
     // TODO: Rename and change types and number of parameters
@@ -75,6 +63,8 @@ public class ProdiListFragment extends Fragment {
         Bundle args = new Bundle();
         args.putSerializable(ARG_KAMPUS_ID, kampusId);
         fragment.setArguments(args);
+
+        Log.d(TAG, TAG + ".newInstance() Success");
         return fragment;
     }
 
@@ -86,8 +76,7 @@ public class ProdiListFragment extends Fragment {
         mProdiRecyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(getContext(), R.anim.layout_animation));
         mProdiRecyclerView.setAdapter(mAdapter);
 
-        Log.i(TAG, TAG + ".onCreateView() Success");
-
+        Log.d(TAG, TAG + ".onCreateView() Success");
         return view;
     }
 
@@ -99,7 +88,7 @@ public class ProdiListFragment extends Fragment {
             @Override
             public void onChanged(List<Prodi> prodis) {
                 updateUI(prodis);
-                Log.i(TAG, TAG + ".Got Kampus: " + prodis.size());
+                Log.i(TAG, TAG + ".Got Prodi: " + prodis.size());
             }
         });
     }

@@ -46,7 +46,7 @@ public class UserLoginRepository {
             public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
                 if (response.isSuccessful()) {
                     userLogin.setValue(response.body());
-                    CariKampusMethods.printLog(TAG, "getUserLoginById.onResponse() Called!");
+                    Log.i(TAG, TAG + ".getUserLoginByUsernamePassword() Success");
                 }
             }
 
@@ -68,7 +68,7 @@ public class UserLoginRepository {
             public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
                 if (response.isSuccessful()) {
                     userLogin.setValue(response.body());
-                    CariKampusMethods.printLog(TAG, "getUserLoginById.onResponse() Called!");
+                    Log.i(TAG, TAG + ".saveUser() Success");
                 }
             }
 
@@ -90,7 +90,7 @@ public class UserLoginRepository {
             public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
                 if (response.isSuccessful()) {
                     userLogin.setValue(response.body());
-                    CariKampusMethods.printLog(TAG, "getUserLoginById.onResponse() Called!");
+                    Log.i(TAG, TAG + ".updateUser() Success");
                 }
             }
 

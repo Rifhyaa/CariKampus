@@ -43,14 +43,13 @@ public class KampusFavoritFragment extends Fragment {
     private static final String TAG = "KampusFavoritFragment";
     private static final String ARG_USER_ID = "id_user";
 
-    private KampusListViewModel mKampusListViewModel;
+
     private RecyclerView mKampusRecyclerView;
     private KampusAdapter mAdapter;
 
     private KampusFavoritViewModel mKampusFavoritViewModel;
     private int mUserId = 0;
 
-//    private View mViewLayoutEmpty;
     private View mViewLayoutEmptyFavorite;
 
     private List<Kampus> mKampuses;
@@ -111,7 +110,7 @@ public class KampusFavoritFragment extends Fragment {
             mKampusRecyclerView.setVisibility(View.VISIBLE);
         }
 
-        Log.i(TAG, TAG + ".updateUI() Success " + kampus);
+        Log.d(TAG, TAG + ".updateUI() Success " + kampus);
     }
 
     private void setFavoritAdapter(List<KampusFavorit> kampusFavorits) {
@@ -126,19 +125,19 @@ public class KampusFavoritFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mKampusListViewModel = new ViewModelProvider(this).get(KampusListViewModel.class);
+//        mKampusListViewModel = new ViewModelProvider(this).get(KampusListViewModel.class);
         mKampusFavoritViewModel = new ViewModelProvider(this).get(KampusFavoritViewModel.class);
         mAdapter = new KampusAdapter(Collections.<Kampus>emptyList());
 
         mUserId = (int) getArguments().getSerializable(ARG_USER_ID);
 
-        Log.i(TAG, TAG + ".onCreate() Success");
+        Log.d(TAG, TAG + ".onCreate() Success");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorite_kampus, container, false);
-//        mViewLayoutEmpty = view.findViewById(R.id.empty_data);
+
         mViewLayoutEmptyFavorite = view.findViewById(R.id.empty_favorite);
 
         mKampusRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
@@ -146,15 +145,13 @@ public class KampusFavoritFragment extends Fragment {
         mKampusRecyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(getContext(), R.anim.layout_animation));
         mKampusRecyclerView.setAdapter(mAdapter);
 
-        Log.i(TAG, TAG + ".onCreateView() Success");
+        Log.d(TAG, TAG + ".onCreateView() Success");
         return view;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.i(TAG, "onViewCreated() Called!");
-
 
         mKampusFavoritViewModel.getListKampusFavorit(mUserId).observe(
                 getViewLifecycleOwner(),
@@ -166,6 +163,8 @@ public class KampusFavoritFragment extends Fragment {
                         setFavoritAdapter(kampusFavorits);
                     }
                 });
+
+        Log.i(TAG, TAG + ".onViewCreated() Success");
     }
 
     /**
@@ -248,7 +247,7 @@ public class KampusFavoritFragment extends Fragment {
             mNamaKampusTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getActivity(), mKampus.getId() + " Clicked!", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), mKampus.getId() + " Clicked!", Toast.LENGTH_SHORT).show();
                     mCallbacks.onKampusSelected(mKampus.getId());
                 }
             });

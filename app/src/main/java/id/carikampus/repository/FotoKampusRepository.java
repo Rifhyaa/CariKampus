@@ -45,7 +45,7 @@ public class FotoKampusRepository {
             public void onResponse(Call<List<FotoKampus>> call, Response<List<FotoKampus>> response) {
                 if (response.isSuccessful()) {
                     fotoKampusList.setValue(response.body());
-                    CariKampusMethods.printLog(TAG, "getKampusById.onResponse() Called!");
+                    Log.i(TAG, TAG + ".getListFotoKampus() Success");
                 }
             }
 
@@ -54,37 +54,6 @@ public class FotoKampusRepository {
                 Log.e(TAG, "onFailure: " + t.getMessage());
             }
         });
-//        call.enqueue(new Callback<List<FotoKampus>>() {
-//            @Override
-//            public void onResponse(Call<List<FotoKampus>> call, Response<List<FotoKampus>> response) {
-//                if (response.isSuccessful()) {
-////                    fotoKampusList.addAll(response.body().);
-//                    // Add address to list
-//                    fotoKampusList.addAll(response.body());
-////                    fotoKampusList.setValue(response.body());
-//                    CariKampusMethods.printLog(TAG, "getKampusById.onResponse() Called!");
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<FotoKampus>> call, Throwable t) {
-//                Log.e(TAG, "onFailure: " + t.getMessage());
-//            }
-//        });
-//        call.enqueue(new Callback<List<FotoKampus>>() {
-//            @Override
-//            public void onResponse(Call<List<FotoKampus>> call, Response<List<FotoKampus>> response) {
-//                if (response.isSuccessful()) {
-//                    fotoKampusList.setValue(response.body());
-//                    CariKampusMethods.printLog(TAG, "getKampusById.onResponse() Called!");
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<FotoKampus>> call, Throwable t) {
-//                Log.e(TAG, "onFailure: " + t.getMessage());
-//            }
-//        });
 
         return fotoKampusList;
     }

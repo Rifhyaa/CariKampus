@@ -88,7 +88,6 @@ public class KampusFragment extends Fragment {
     private KomentarViewModel mKomentarViewModel;
 
     // Fragment Component
-
     private TextInputEditText mNamaKampusText;
     private TextInputEditText mSingkatanText;
     private TextInputEditText mAkreditasiText;

@@ -20,7 +20,10 @@ import id.carikampus.model.Kampus;
 
 public class DashboardFragment extends Fragment {
 
-    TextView mNamaUserTextView;
+    private static final String TAG = "DashboardFragment";
+
+    // Fragment Component
+    private TextView mNamaUserTextView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,7 +36,7 @@ public class DashboardFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
         mNamaUserTextView = v.findViewById(R.id.text_nama_user);
-        mNamaUserTextView.setText("Halo " + Preferences.getNameUser(getContext()));
+        mNamaUserTextView.setText("Halo " + Preferences.getNameUser(getContext()) + "!");
         return v;
     }
 }

@@ -43,10 +43,6 @@ public class CariKampusMethods {
         return models;
     }
 
-    public static void printLog(String TAG, String key) {
-        Log.d(TAG, key);
-    }
-
     public static List<Kampus> getListKampusByFavorite(List<KampusFavorit> kampusFavorits, int idUser) {
         List<Kampus> list = new ArrayList<>();
 
@@ -107,7 +103,7 @@ public class CariKampusMethods {
 
         // Check if value is null
         if (kampusFavorits == null) {
-            Log.d(TAG, "Message : ListKampusFavorit is null");
+            Log.d(TAG, ".isUserFavoriteKampus() Message : ListKampusFavorit is null");
             return kampus;
         }
 
@@ -128,9 +124,6 @@ public class CariKampusMethods {
         }
 
         if (myString.isEmpty()) {
-//            myString.add("https://ie.binus.ac.id/files/2015/04/DSC06004UPDATE.jpg");
-//            myString.add("https://lh3.googleusercontent.com/p/AF1QipMyvbMxpApPuPJ88Y-cH-N_N2z1a83f3-OfbVfg=w600-h0");
-//            myString.add("https://asset.kompas.com/crops/wT4FMTcjLi6fY9jnR4z_VcEVYkA=/0x0:915x610/750x500/data/photo/2019/11/03/5dbe42c2a8fc8.jpg");
             myString.add("https://www.teahub.io/photos/full/303-3034192_default-banner-banner-jpg.jpg");
         }
 

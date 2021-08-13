@@ -47,7 +47,7 @@ public class KampusFavoritRepository {
             @Override
             public void onResponse(Call<List<KampusFavorit>> call, Response<List<KampusFavorit>> response) {
                 lists.setValue(response.body());
-                CariKampusMethods.printLog(TAG, "getKampusById.onResponse() Called!");
+                Log.i(TAG, TAG + ".getListKampusFavoritById() Success");
             }
 
             @Override
@@ -67,7 +67,7 @@ public class KampusFavoritRepository {
             @Override
             public void onResponse(Call<List<KampusFavorit>> call, Response<List<KampusFavorit>> response) {
                 lists.setValue(response.body());
-                Log.d(TAG, "onSuccess: getListKampusFavoritByIdKampus()");
+                Log.i(TAG, TAG + ".getListKampusFavoritByIdKampus() Success");
             }
 
             @Override
@@ -88,7 +88,7 @@ public class KampusFavoritRepository {
             public void onResponse(Call<KampusFavorit> call, Response<KampusFavorit> response) {
                 if (response.isSuccessful()) {
                     kampusFavorit.setValue(response.body());
-                    CariKampusMethods.printLog(TAG, "getKampusFavoritById.onResponse() Called!");
+                    Log.i(TAG, TAG + ".saveKampusFavorit() Success");
                 }
             }
 

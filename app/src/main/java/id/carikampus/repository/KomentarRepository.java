@@ -45,7 +45,7 @@ public class KomentarRepository {
             @Override
             public void onResponse(Call<List<Komentar>> call, Response<List<Komentar>> response) {
                 lists.setValue(response.body());
-                CariKampusMethods.printLog(TAG, "getKampusById.onResponse() Called!");
+                Log.i(TAG, TAG + ".getListKomentarByIdKampus() Success");
             }
 
             @Override

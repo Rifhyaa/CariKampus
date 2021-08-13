@@ -27,7 +27,7 @@ public class OnBoardingFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.item_introduction, container, false);
 
-        Log.i(TAG, TAG + ".onCreateView() Success");
+        Log.d(TAG, TAG + ".onCreateView() Success");
         return root;
     }
 

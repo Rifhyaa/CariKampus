@@ -13,9 +13,9 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //menghilangkan ActionBar
-//        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        // Menyembunyikan ActionBar
         this.getSupportActionBar().hide();
+        
         setContentView(R.layout.activity_splash_screen);
 
         final Handler handler = new Handler();

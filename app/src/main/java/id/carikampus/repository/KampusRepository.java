@@ -45,7 +45,7 @@ public class KampusRepository {
             public void onResponse(Call<List<Kampus>> call, Response<List<Kampus>> response) {
                 if (response.isSuccessful()) {
                     kampusList.setValue(response.body());
-                    CariKampusMethods.printLog(TAG, "getListKampus.onResponse() Called!");
+                    Log.i(TAG, TAG + ".getListKampus() Success");
                 }
             }
 
@@ -67,7 +67,7 @@ public class KampusRepository {
             public void onResponse(Call<Kampus> call, Response<Kampus> response) {
                 if (response.isSuccessful()) {
                     kampus.setValue(response.body());
-                    CariKampusMethods.printLog(TAG, "getKampusById.onResponse() Called!");
+                    Log.i(TAG, TAG + ".getKampusById() Success");
                 }
             }
 

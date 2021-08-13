@@ -16,7 +16,9 @@
             android:id="@+id/text_nama_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
             android:layout_alignParentTop="true"
+
             android:layout_marginBottom="4dp"
             android:text="Nama User"
             android:textColor="@color/black"/>
@@ -25,9 +27,11 @@
             android:id="@+id/text_komentar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
             android:layout_below="@+id/text_nama_user"
             android:text="Isi Komentar"
             android:textColor="#8b8b8b"
+            android:textSize="12sp"
             android:layout_marginBottom="4dp"/>
 
     </RelativeLayout>

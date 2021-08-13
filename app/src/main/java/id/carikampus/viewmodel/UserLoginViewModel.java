@@ -35,6 +35,10 @@ public class UserLoginViewModel extends ViewModel {
         return mUserLoginRepository.saveUser(myUser);
     }
 
+    public LiveData<UserLogin> updateUserLogin(UserLogin myUser) {
+        return mUserLoginRepository.updateUser(myUser);
+    }
+
     public LiveData<UserLogin> getUserLoginLiveData() {
         Log.i(TAG, TAG + ".getUserLoginLiveData() Success");
 

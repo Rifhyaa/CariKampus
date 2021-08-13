@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -22,6 +23,7 @@ import id.carikampus.fragment.KampusListFragment;
 import id.carikampus.fragment.ProdiFragment;
 import id.carikampus.fragment.ProdiListFragment;
 import id.carikampus.fragment.SettingsFragment;
+import id.carikampus.helper.InternetDialog;
 import id.carikampus.helper.Preferences;
 import id.carikampus.model.KampusFavorit;
 
@@ -33,6 +35,10 @@ public class MainActivity extends AppCompatActivity implements KampusListFragmen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(new InternetDialog(this).getInternetStatus()){
+            Toast.makeText(this, "INTERNET VALIDATION PASSED", Toast.LENGTH_SHORT).show();
+        }
 
         this.getSupportActionBar().setBackgroundDrawable(new ColorDrawable((Color.parseColor("#FB770D"))));
 //        this.getSupportActionBar().setIcon(R.drawable.icon_logo);

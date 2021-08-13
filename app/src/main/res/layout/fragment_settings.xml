@@ -44,6 +44,7 @@
 
                 <TextView
                     style="@style/viewParent.headerText"
+                    android:fontFamily="@font/poppins_regular"
                     android:text="Pengaturan" />
 
                 <RelativeLayout
@@ -57,25 +58,28 @@
                         android:layout_height="60dp"
                         android:layout_marginTop="15dp"
                         android:layout_marginRight="10dp"
-                        android:src="@drawable/ic_person_foreground" />
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/undraw_profile_pic" />
 
                     <TextView
                         android:id="@+id/usernameTextView"
-                        style="@style/viewParent.headerText"
-                        android:layout_marginTop="25dp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:fontFamily="@font/poppins_regular"
+                        android:layout_marginTop="20dp"
                         android:layout_toRightOf="@id/profileCircleImageView"
                         android:text="Mochammad Rifqy"
-                        android:textSize="20sp" />
+                        android:textSize="18sp" />
 
                     <TextView
-                        android:id="@+id/email_user"
-                        style="@style/viewParent.headerText"
+                        android:id="@+id/username_user"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:fontFamily="@font/poppins_regular"
                         android:layout_below="@id/usernameTextView"
                         android:layout_toRightOf="@id/profileCircleImageView"
-                        android:text="muhrifh@gmail.com"
-                        android:textColor="#5D5C5C"
-                        android:visibility="gone"
-                        android:textSize="16sp" />
+                        android:text="Username"
+                        android:textColor="#5D5C5C" />
 
                     <TextView
                         android:id="@+id/idUser"
@@ -84,8 +88,8 @@
                         android:layout_toRightOf="@id/profileCircleImageView"
                         android:textColor="#5D5C5C"
                         android:textSize="16sp"
-                        android:visibility="invisible"
-                        />
+                        android:visibility="invisible" />
+
                     <TextView
                         android:id="@+id/uName"
                         style="@style/viewParent.headerText"
@@ -106,15 +110,16 @@
                     style="@style/Widget.MaterialComponents.Button.Icon"
                     android:backgroundTint="@color/btn_danger"
                     app:iconGravity="textStart"
-                    android:text="Logout" />
+                    android:text="Keluar" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
                     android:text="Data Akun"
                     android:layout_marginVertical="10dp"
                     style="@style/viewParent.headerText"
-                    android:paddingVertical="10dp"
+                    android:paddingVertical="5dp"
                     android:textSize="16sp"
                     android:textColor="#5D5C5C"
                     android:background="@drawable/border_bottom_1_grey"/>

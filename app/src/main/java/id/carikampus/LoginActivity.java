@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                         Preferences.setEmailUser(getApplicationContext(), userLogin.getEmail());
                         Preferences.setLoggedInStatus(getApplicationContext(), true);
 
-                        new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.NORMAL_TYPE)
+                        new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.SUCCESS_TYPE)
                                 .setTitleText("Login berhasil!")
                                 .setContentText("Selamat datang " + userLogin.getNama())
                                 .setConfirmText("Ok!")

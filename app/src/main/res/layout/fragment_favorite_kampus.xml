@@ -6,39 +6,12 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!--    <EditText-->
-    <!--        android:id="@+id/search_kampus"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_margin="10dp"-->
-    <!--        android:background="@drawable/search_bg"-->
-    <!--        android:drawableStart="@drawable/ic_search_black_24"-->
-    <!--        android:drawablePadding="10dp"-->
-    <!--        android:ems="10"-->
-    <!--        android:hint="Cari Kampus..."-->
-    <!--        android:inputType="textPersonName"-->
-    <!--        android:padding="8dp"-->
-
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--    <include-->
-<!--        android:id="@+id/empty_data"-->
-<!--        layout="@layout/fragment_empty_result"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:visibility="gone"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
-
     <include
         android:id="@+id/empty_favorite"
         layout="@layout/fragment_empty_favorite"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -48,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layoutAnimation="@anim/layout_animation"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 

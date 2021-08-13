@@ -28,6 +28,7 @@
                 style="@style/homeHeading"
                 android:textColor="@color/blackTextColor"
                 android:textSize="@dimen/headerTextSize"
+                android:fontFamily="@font/poppins_regular"
                 android:text="No Internet"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"/>
@@ -37,10 +38,11 @@
                 style="@style/learnhubTitleText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 android:text="Please check your connection status and try again"
-                android:textSize="14dp"
+                android:textSize="12dp"
                 android:textStyle="normal" />
 
             <Button

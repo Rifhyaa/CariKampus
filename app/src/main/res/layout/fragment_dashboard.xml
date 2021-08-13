@@ -16,10 +16,10 @@
             android:id="@+id/text_nama_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="15dp"
             android:text="Halo Mochammad Rifqy!"
-            android:fontFamily="@font/poppins__regular"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -27,7 +27,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins__regular"
+            android:fontFamily="@font/poppins_regular"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="10dp"
             android:text="Cari dan tentukan kampus favoritmu"
@@ -64,8 +64,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
             android:layout_marginTop="20dp"
-            android:paddingVertical="10dp"
+            android:paddingVertical="5dp"
             android:background="@drawable/border_bottom_1_grey"
             android:text="Kampus Terfavorit"
             android:textStyle="bold"
@@ -79,8 +80,8 @@
 
             <ImageView
                 android:id="@+id/image_1"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginEnd="15dp"
                 android:adjustViewBounds="true"
@@ -92,29 +93,31 @@
                 android:id="@+id/text_1_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
                 android:layout_alignParentTop="true"
-                android:layout_marginBottom="5dp"
                 android:layout_toEndOf="@+id/image_1"
                 android:text="Politeknik Astra"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/text_1_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
                 android:layout_below="@+id/text_1_1"
                 android:layout_toEndOf="@+id/image_1"
                 android:text="Akreditasi B"
-                android:layout_marginBottom="5dp" />
+                android:layout_marginBottom="2dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
                 android:layout_below="@+id/text_1_2"
                 android:layout_toEndOf="@+id/image_1"
                 android:text="5 Favorits"
-                android:layout_marginBottom="5dp" />
+                android:layout_marginBottom="3dp" />
 
         </RelativeLayout>
 
@@ -122,12 +125,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingVertical="10dp"
-            android:background="@drawable/border_bottom_1_grey">>
+            android:background="@drawable/border_bottom_1_grey">
 
             <ImageView
                 android:id="@+id/image_2"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginEnd="15dp"
                 android:adjustViewBounds="true"
@@ -139,29 +142,30 @@
                 android:id="@+id/text_2_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
                 android:layout_alignParentTop="true"
-                android:layout_marginBottom="5dp"
                 android:layout_toEndOf="@+id/image_2"
                 android:text="Universitas Negeri Jakarta"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/text_2_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
                 android:layout_below="@+id/text_2_1"
                 android:layout_toEndOf="@+id/image_2"
                 android:text="Akreditasi B"
-                android:layout_marginBottom="5dp" />
-
+                android:layout_marginBottom="2dp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
                 android:layout_below="@+id/text_2_2"
                 android:layout_toEndOf="@+id/image_2"
                 android:text="4 Favorits"
-                android:layout_marginBottom="5dp" />
+                android:layout_marginBottom="3dp" />
 
         </RelativeLayout>
 
@@ -173,8 +177,8 @@
 
             <ImageView
                 android:id="@+id/image_3"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginEnd="15dp"
                 android:adjustViewBounds="true"
@@ -186,29 +190,31 @@
                 android:id="@+id/text_3_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
                 android:layout_alignParentTop="true"
-                android:layout_marginBottom="5dp"
                 android:layout_toEndOf="@+id/image_3"
                 android:text="Binus University"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/text_3_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
                 android:layout_below="@+id/text_3_1"
                 android:layout_toEndOf="@+id/image_3"
                 android:text="Akreditasi A"
-                android:layout_marginBottom="5dp" />
+                android:layout_marginBottom="2dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
                 android:layout_below="@+id/text_3_2"
                 android:layout_toEndOf="@+id/image_3"
                 android:text="4 Favorits"
-                android:layout_marginBottom="5dp" />
+                android:layout_marginBottom="3dp" />
 
         </RelativeLayout>
 
